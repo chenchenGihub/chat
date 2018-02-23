@@ -35,7 +35,9 @@ export class InputToolbar extends React.Component<Props,*>{
 	  this.state = {
 	  	showTextInput:true,
 	  	isSpeak:false,
-	  	showEmojis:false
+	  	showEmojis:false,
+	  	showOperate:false,
+	  	value:''
 	  };
 	}
 
@@ -56,13 +58,13 @@ shouldComponentUpdate(nextProps, nextState) {
 componentDidUpdate(prevProps, prevState) {
 
 
+  // if(this.state.showTextInput){
 
-  if(this.state.showTextInput){
+  // 	this.refs.textInput.focus()
 
-  	this.refs.textInput.focus()
-
-  	return
-  }
+  // 	return
+  // }
+ 
   //this.refs.textInput.blur()
   this.props.renderAudio(this.state.showTextInput,this.state.isSpeak)
 }
@@ -80,20 +82,34 @@ _Speak=()=>{
 }
 
 _openEmoji=()=>{
-	this.setState({
-		showEmojis:!this.state.showEmojis
-	})
 
-	dismissKeyboard();
+	console.log(this.refs.textInput.props.value)
+	this.setState(preState=>{
+		return {showEmojis:!preState.showEmojis}
+	})
+	this.props.OperateDashBoard(this.state.showEmojis);
+}
+
+_openOperation=()=>{
+	this.setState({
+		showOperate:!this.state.showOperate
+	})
+	//this.props.OperateDashBoard(this.props.ToolBarHeight)
+}
+onChangeText=(v)=>{
+	this.setState({
+		...this.state,
+		value:v
+	})
 }
 
 	render():React.Node{
 		
 		const { hasValue } = this.props;
 		const { showTextInput,isSpeak,showEmojis} = this.state;
-		//console.log(showTextInput)
+		const TouchableButton=Platform.OS==='ios'?TouchableWithoutFeedback:TouchableNativeFeedback
 		return(
-				<View style={[this.props.inputToolbar,styles.container]}>
+				<View style={[styles.container]}>
 					
 					<TouchableWithoutFeedback onPress={this._showTextInput}>
 						{showTextInput?
@@ -126,7 +142,9 @@ _openEmoji=()=>{
 							onEndEditing={this.props.onEndEditing}
 							onSelectionChange={this.props.onSelectionChange}
 							returnKeyType={'go'}
-							onFocus={Keyboard.dismiss}
+							value={this.props.hasValue}
+							editable={true}
+							//onFocus={Keyboard.dismiss}
 							//selectionColor={'#e83f24'}
 							//selection={{start: 1,end: 1}}
 						/>
@@ -141,7 +159,7 @@ _openEmoji=()=>{
 
 					}				
 					
-						<TouchableWithoutFeedback onPress={this._openEmoji}>
+						<TouchableButton onPress={this._openEmoji}>
 							{!showEmojis?
 							(<View style={styles.emojiBtn}>
 								<Entypo name='emoji-flirt' size={28} color={"#5b5b6b"}/>
@@ -150,10 +168,10 @@ _openEmoji=()=>{
 							(<View style={styles.Textinput}>
 								<Entypo name='keyboard' size={18}/>
 							</View>)}
-						</TouchableWithoutFeedback>
+						</TouchableButton>
 						{
 									!hasValue?
-						(<TouchableWithoutFeedback >
+						(<TouchableWithoutFeedback onPress={this._openOperation}>
 							<View style={styles.plusBtn}>
 								
 									<EvilIcons name='plus' size={40} color={"#5b5b6b"}/>

@@ -10,11 +10,15 @@ import {
 		StyleSheet,
 		Platform,
  }from 'react-native';
+import Entypo from 'react-native-vector-icons/Entypo';
+
 
 const { width,height } = Dimensions.get('window');
 
 import emoji from '../../constant/constant.js';
 import { shallowEqual } from '../../utils/utils';
+
+const iconName=['image','camera']
 
  export  default  class ToolBar extends React.Component{
  	constructor(props){
@@ -39,9 +43,9 @@ import { shallowEqual } from '../../utils/utils';
       
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-      return !shallowEqual(nextProps,this.props)
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //   return !shallowEqual(nextProps,this.props)
+    // }
 
     //点击圆点，关闭定时器，并设置当前图片索引
     dotClick(index){
@@ -79,6 +83,31 @@ import { shallowEqual } from '../../utils/utils';
     inputEmoji(ele){
     	console.log(ele)
     }
+
+    renderDashBoard=()=>{
+        return (
+            <View style={styles.emojiBox}>
+                <TouchableWithoutFeedback onPress={()=>{console.log(123)}}>
+                <View style={{flexDirection: 'row',}}>
+                    <View  style={styles.operateIconBox}>
+                        <Entypo name='image' size={40}/>
+                        <Text>相册</Text>
+                    </View>
+                    <View  style={styles.operateIconBox}>
+                        <Entypo name='camera' size={40}/>
+                         <Text>拍摄</Text>
+                    </View>
+                    <View  style={styles.operateIconBox}>
+                        <Entypo name='location-pin' size={40}/>
+                         <Text>位置</Text>
+                    </View>
+                </View>
+                    
+                </TouchableWithoutFeedback>
+            </View>
+        )
+    }
+
     render() {
 
     	console.log("ToolBar",this.props)
@@ -106,27 +135,32 @@ import { shallowEqual } from '../../utils/utils';
                 </View>
             )
         });
-      const dotList = emoji.map((elem,index)=>{
-          return (
-          		<TouchableWithoutFeedback onPress={()=>{this.dotClick(index)}} key={index}>         			
-                	<View style={[styles.dotStyle,{backgroundColor:currentIndex===index?"red":"#eee"}]}/>
-          		</TouchableWithoutFeedback>
-          )
-      })
+      // const dotList = emoji.map((elem,index)=>{
+      //     return (
+      //     		<TouchableWithoutFeedback onPress={()=>{this.dotClick(index)}} key={index}>         			
+      //           	<View style={[styles.dotStyle,{backgroundColor:currentIndex===index?"red":"#eee"}]}/>
+      //     		</TouchableWithoutFeedback>
+      //     )
+      // })
     return (
-      <View style={[styles.carousel,{height:ToolBarHeight}]}>
-         <ScrollView
-             ref="scrollView"
-             horizontal={true}
-             showsHorizontalScrollIndicator={false}
-             pagingEnabled={true}
-             onScrollBeginDrag={this.dragStart}
-             onScrollEndDrag={this.dragEnd}
-             onMomentumScrollEnd={this.onAnnotationEnd}
-         >
-             {imgDataList}
-         </ScrollView>
-         {ToolBarHeight?(<View style={styles.dotView}>{dotList}</View>):null}
+      <View style={[styles.carousel,{height:258}]}>
+
+            <View> 
+                 <ScrollView
+                     ref="scrollView"
+                     horizontal={true}
+                     showsHorizontalScrollIndicator={false}
+                     pagingEnabled={true}
+                     onScrollBeginDrag={this.dragStart}
+                     onScrollEndDrag={this.dragEnd}
+                     onMomentumScrollEnd={this.onAnnotationEnd}
+
+                 >
+                     {this.renderDashBoard()}
+                 </ScrollView>
+                 {/*{ToolBarHeight?(<View style={styles.dotView}>{dotList}</View>):null}*/}
+            </View>
+
       </View>
     );
   }
@@ -153,12 +187,25 @@ const styles = StyleSheet.create({
     },
     carousel:{
     	backgroundColor: "#fff",
+        flex:1
     },
     emojisort:{    	
     	padding: width*0.02,
     },
     emojiText:{
     	fontSize: Platform.OS==='ios'? 25 : 20,
-    }
+    },
+    operateIconBox:{
+        borderWidth: 1,
+        borderColor: '#eaeaea',
+        borderStyle: 'solid',
+        width:width*0.2,
+        height:width*0.2,
+        borderRadius:width*0.02,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: width*0.1,
+        marginLeft: width*0.1,
+    },
 });
 

@@ -25,7 +25,7 @@ export class ChatBox extends React.Component<*,*>{
 	
 	  this.state = {
 	  	isSpeak:false,
-	  	ToolBarHeight:0
+	  	showDashBoard:true
 	  };
 
 	  this._keyboardHeight=0;
@@ -52,17 +52,18 @@ export class ChatBox extends React.Component<*,*>{
   	}  
 
   	_keyboardDidShow(event){
-  		//console.log("event",event);
+  
   		this.setKeyboardHeight(event.endCoordinates ? event.endCoordinates.height:event.end.height);
-  		this.setState(preState=>{
-  			return{
-  				...preState,
-  				ToolBarHeight:this.getKeyboardHeight()
-  			}
-  		})
-
+  		this.setState({
+			...this.state,
+			showDashBoard:true
+		})
   	}
   	_keyboardWillShow(event){
+  		this.setState({
+			...this.state,
+			showDashBoard:true
+		})
   		console.log("event",event);
   		return
   	}
@@ -78,6 +79,7 @@ export class ChatBox extends React.Component<*,*>{
 
 		console.log(showTextInput,isSpeak);
 		this.setState({
+			...this.state,
 			isSpeak
 		})
 		
@@ -99,18 +101,34 @@ export class ChatBox extends React.Component<*,*>{
 				
 		}
 
-	dismissKeyboard=()=>{
-		console.log("dismiss")
-		 Keyboard.dismiss()
-	}	
 	
-	@autobind	
-	_onLayout(){
-		return this.state.ToolBarHeight
-	}	
+	OperateDashBoard=(isShowEmoji)=>{
+
+		this.setState({
+			...this.state,
+			showDashBoard:isShowEmoji
+		})
+		
+	}
+
+
+	_renderDashBoard(){
+
+		if(!this.state.showDashBoard){		
+		return (<ToolBar 
+				style={styles.ToolBarBox} 
+				ToolBarHeight={258} 
+				onChangeText={this.props.onChangeText} 
+				onChange={this.props.onChange}/>)
+					
+		}
+
+		return null
+}
 
 	render():React.Node{
-		//console.log("render",this.props)
+		console.log("render",this.state.showDashBoard)
+		const { showDashBoard } = this.state.showDashBoard
 		return(
 			<View style={styles.container}>
 				<MessageContainer 
@@ -130,16 +148,14 @@ export class ChatBox extends React.Component<*,*>{
 					handleSubmit={this.props.handleSubmit}
 					hadSend={this.props.hadSend}
 					renderAudio={this.renderAudio}
-					dismissKeyboard={this.dismissKeyboard}
+					//dismissKeyboard={this.dismissKeyboard}
+					OperateDashBoard={this.OperateDashBoard}
+					//ToolBarHeight={this.state.ToolBarHeight}
 				/>
 				{Platform.OS==='ios' ? <KeyboardSpacer/>:null}
-				<ToolBar
-					style={styles.ToolBarBox}
-					ToolBarHeight={this.state.ToolBarHeight}
-					onChangeText={this.props.onChangeText}
-					onChange={this.props.onChange}
-					ToolBarHeight={this.state.ToolBarHeight}
-				/>	
+				
+				{ this._renderDashBoard() }
+
 			</View>
 			)
 	}

@@ -5,6 +5,7 @@ import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/Car
 import axios from 'axios'
 import DeviceInfo from 'react-native-device-info'
 
+
 import Login from '../container/login/login.js'
 import Auth from '../container/auth/auth.js'
 import Register from '../container/register/register.js'
@@ -15,6 +16,9 @@ import UserDetail from '../container/userdetail/userdetail.js'
 import ChatTo from '../container/chatto/chatto.js'
 import { updateUserInfo,logout } from '../redux/user.redux.js'
 import { port } from '../utils/dev'
+
+
+//global.socket=socket;
 
 export const RootNavigator = StackNavigator({
   Auth:{
@@ -62,8 +66,10 @@ componentDidMount() {
           key: 'user'
         }).then(user => {
           //如果找到数据，则在then方法中返回
+          //console.log(user)
          axios.post(`${port}/user/info`,{userId:user._id,deviceUniqueId:DeviceInfo.getUniqueID()}).then(res=>{
         if(res.status===200){
+          console.log(res)
           if(res.data.code===0){
             socket.emit("setName",res.data.data._id)//用户上线
             this.props.updateUserInfo(res.data.data);

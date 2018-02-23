@@ -39,7 +39,7 @@ export class MessageContainer extends React.Component{
 	}
 
 
-	_keyExtractor=(item, index)=>item._id
+	_keyExtractor=(item, index)=>(item._id).toString();
 	
 	_renderItem=({item})=>{
 		

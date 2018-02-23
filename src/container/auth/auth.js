@@ -6,6 +6,7 @@ import { NavigationActions } from 'react-navigation'
 import { ActivityIndicator } from 'antd-mobile'
 import { propsEqual } from 'react-shallow-equal'; 
 
+
 import { updateUserInfo } from '../../redux/user.redux.js';
 import { redirectTo } from '../../utils/utils'
 import { port } from '../../utils/dev'
