@@ -11,7 +11,7 @@ import {
 		Platform,
  }from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
-
+//import { RNCamera } from 'react-native-camera';
 
 const { width,height } = Dimensions.get('window');
 
@@ -101,8 +101,7 @@ const iconName=['image','camera']
                         <Entypo name='location-pin' size={40}/>
                          <Text>位置</Text>
                     </View>
-                </View>
-                    
+                </View>                   
                 </TouchableWithoutFeedback>
             </View>
         )
