@@ -38,6 +38,10 @@
     hoist-non-react-statics "^2.2.2"
     prop-types "^15.5.10"
 
+"@types/prop-types@^15.5.2":
+  version "15.5.2"
+  resolved "http://registry.npm.taobao.org/@types/prop-types/download/@types/prop-types-15.5.2.tgz#3c6b8dceb2906cc87fe4358e809f9d20c8d59be1"
+
 abab@^1.0.4:
   version "1.0.4"
   resolved "http://registry.npm.taobao.org/abab/download/abab-1.0.4.tgz#5faad9c2c07f60dd76770f71cf025b62a63cfd4e"
@@ -3015,6 +3019,10 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
+keymirror@0.1.1:
+  version "0.1.1"
+  resolved "http://registry.npm.taobao.org/keymirror/download/keymirror-0.1.1.tgz#918889ea13f8d0a42e7c557250eee713adc95c35"
+
 keypress@0.1.x:
   version "0.1.0"
   resolved "http://registry.npm.taobao.org/keypress/download/keypress-0.1.0.tgz#4a3188d4291b66b4f65edb99f806aa9ae293592a"
@@ -3127,6 +3135,10 @@ lodash._reinterpolate@^3.0.0:
 lodash._root@^3.0.0:
   version "3.0.1"
   resolved "http://registry.npm.taobao.org/lodash._root/download/lodash._root-3.0.1.tgz#fba1c4524c19ee9a5f8136b4609f017cf4ded692"
+
+lodash.debounce@^4.0.8:
+  version "4.0.8"
+  resolved "http://registry.npm.taobao.org/lodash.debounce/download/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
 
 lodash.escape@^3.0.0:
   version "3.2.0"
@@ -4125,9 +4137,9 @@ react-native-camera-roll-picker@^1.2.1:
   version "1.2.3"
   resolved "http://registry.npm.taobao.org/react-native-camera-roll-picker/download/react-native-camera-roll-picker-1.2.3.tgz#b117fd3a2b9012dcccee1261a9bc427226b8d6d2"
 
-react-native-camera@^1.0.1:
+"react-native-camera@git+https://git@github.com/react-native-community/react-native-camera":
   version "1.0.1"
-  resolved "http://registry.npm.taobao.org/react-native-camera/download/react-native-camera-1.0.1.tgz#ebb131226394b4ee3ec6692979a257522b3ac0c1"
+  resolved "git+https://git@github.com/react-native-community/react-native-camera#d8d413105ba814a9926b941d2da566dd5e4922e0"
   dependencies:
     lodash "^4.17.4"
     prop-types "^15.5.10"
@@ -4246,6 +4258,14 @@ react-native-menu@^0.23.0:
     prop-types "^15.5.10"
     react-timer-mixin "^0.13.3"
 
+react-native-modal-popover@^0.0.5:
+  version "0.0.5"
+  resolved "http://registry.npm.taobao.org/react-native-modal-popover/download/react-native-modal-popover-0.0.5.tgz#91bd923ca4f6db23a1a77f156915eb480323a5ec"
+  dependencies:
+    "@types/prop-types" "^15.5.2"
+    lodash.debounce "^4.0.8"
+    prop-types "^15.6.0"
+
 react-native-modal@^5.0.1:
   version "5.0.1"
   resolved "http://registry.npm.taobao.org/react-native-modal/download/react-native-modal-5.0.1.tgz#469f83048de76121e043820af864cb4a6330661f"
@@ -4300,6 +4320,13 @@ react-native-vector-icons@^4.5.0:
     lodash "^4.0.0"
     prop-types "^15.5.10"
     yargs "^8.0.2"
+
+react-native-video@^2.0.0:
+  version "2.0.0"
+  resolved "http://registry.npm.taobao.org/react-native-video/download/react-native-video-2.0.0.tgz#f33fa6fb7e7e3c93ab5787944cefd58bf7355867"
+  dependencies:
+    keymirror "0.1.1"
+    prop-types "^15.5.10"
 
 react-native@0.53.3:
   version "0.53.3"
