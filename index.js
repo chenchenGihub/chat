@@ -3,7 +3,7 @@ import storage  from './src/storage/store.js';
 
 import DeviceInfo from 'react-native-device-info';
 import io from 'socket.io-client';
-const socket = io('ws://192.168.1.104:8088',{
+const socket = io('ws://192.168.0.100:8088',{
 transports: ['websocket'] 
 });
 

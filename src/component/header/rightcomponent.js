@@ -6,7 +6,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   findNodeHandle,
-  NativeModules
+  NativeModules,
+  StatusBar
 } from 'react-native'; 
 import Popover, { PopoverTouchable } from 'react-native-modal-popover';
 import Icon from 'react-native-vector-icons/FontAwesome'

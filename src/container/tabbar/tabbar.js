@@ -25,6 +25,7 @@ import Msg from '../msg/msg'
 import UserList from '../userlist/userlist'
 import Square from '../square/square'
 import Mine from '../mine/mine'
+import Test from '../test/test'
 
 import { getMsgList,sendMsg,receiveMsg } from '../../redux/chat.redux'
 
@@ -63,6 +64,7 @@ export default class TabBarIcon extends React.Component<*, State> {
         color: '#F44336',
       },
       { key: '3', title: '广场', icon: 'windows', color: '#3F51B5' },
+      {key: '4', title: 'test', icon: 'windows', color: '#3F51B5' }
     ],
   };
 
@@ -173,7 +175,8 @@ export default class TabBarIcon extends React.Component<*, State> {
       case '2':
         return <UserList state={this.state} openControlPanel={this._openControlPanel}/>
       case '3':
-        return <Square state={this.state} openControlPanel={this._openControlPanel}/>  
+        return <Square state={this.state} openControlPanel={this._openControlPanel}/> 
+       case '4': return <Test state={this.state} openControlPanel={this._openControlPanel}/> 
     }
   };
 

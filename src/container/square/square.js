@@ -31,6 +31,8 @@ import { shallowEqual } from '../../utils/utils'
 import Mine from '../mine/mine'
 import DataContainer from "../../component/datas/datacontainer"
 import Panel from "../../component/panel/panel"
+import MyCamera from "../../component/panel/camera"
+import VideoRoll from "../../component/panel/videoRoll"
 
 
 const { width,height } = Dimensions.get('window');
@@ -149,18 +151,27 @@ takeVideo=async ()=>{
 // 	}
 
 
-
-
-
 operate(v){
-	if(v=='picOrtext'){
+	console.log("v",v)
+	if(v=='picOrtext'||v=='capatureVideo'||v=='uploadVideo'){
 		this.setState({
-			modalVisible:!this.state.modalVisible
+			modalVisible:!this.state.modalVisible,
+			choice:v
 		})
 	}
+		
 }
 
-
+renderPanelContainer=()=>{
+	if(this.state.choice=='picOrtext'){
+		return (<Panel operate={this.operate}/>)
+	}else if(this.state.choice=='capatureVideo'){
+		return (<MyCamera operate={this.operate}/>)
+	}else{
+			return (<VideoRoll operate={this.operate}/>)
+	}	
+	
+}
 	
 	render(){
 
@@ -176,12 +187,11 @@ operate(v){
 	          animationType={"slide"}
 	          transparent={false}
 	          visible={this.state.modalVisible}
-	          onRequestClose={() => {alert("Modal has been closed.")}}
+	          onRequestClose={() => {this.setState({modalVisible:!this.state.modalVisible})}}
 	          >
-
-	          <Panel
-	          	operate={this.operate}
-	          />
+	          
+	          {this.renderPanelContainer()}
+	          
 	         
         	</Modal>
 		</View>		
@@ -202,14 +212,10 @@ const styles = StyleSheet.create({
   text:{
   	color:'#120909'
   },
-  avatar:{
-		marginTop: width*0.02,
+  title:{
+		color:'#f8f9fd',
+		fontSize: 20,
 	},
-	SearchBar:{
-		position: 'absolute',
-		top:width*0.01,
-		left: width*0.2,
-	}
 });
 
 
