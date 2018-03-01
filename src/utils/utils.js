@@ -1,5 +1,5 @@
 /*flow*/
-import { ToastAndroid } from 'react-native';
+import { ToastAndroid,AlertIOS } from 'react-native';
 import { Toast } from 'antd-mobile';
 import pinyin from "pinyin";
 import _ from 'lodash';
@@ -24,7 +24,9 @@ export function ToastUtils(OS,message,time){
 	OS==='android'?ToastAndroid.showWithGravity(message,time,ToastAndroid.CENTER):Toast.info(message,time)
 }
 
-
+export function ToastMessage(OS,message,time){
+    OS==='android'?ToastAndroid.showWithGravity(message,time,ToastAndroid.CENTER):AlertIOS.alert(message)
+}
 
 export function shallowEqual(objA, objB) {
 	  if (isEqual(objA, objB)) {

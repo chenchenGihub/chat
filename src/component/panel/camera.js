@@ -56,6 +56,8 @@ export default class MyCamera extends React.Component{
 
 
   takePicture = async function() {
+
+    console.log(this.camera)
     if (this.camera) {
       const options = { quality: 0.5, base64: true };
       const data = await this.camera.takePictureAsync(options)
@@ -70,7 +72,9 @@ export default class MyCamera extends React.Component{
       this.setState({
         time:Number(((Date.now()-startTime)/1000)).toFixed(2)
       })
-    },1000)
+    },1000);
+
+  try{
     if (this.camera) {
       const options = { quality: RNCamera.Constants.VideoQuality['2160p'], maxDuration: 20,maxFileSize:1102410240,mute:false };
       const data = await this.camera.recordAsync(options)
@@ -82,6 +86,12 @@ export default class MyCamera extends React.Component{
       //   videoUri:data
       // })
     }
+  } catch(err){
+    console.log(err)
+  }finally{
+    console.log("finally")
+  }
+    
   };
 
   stopVideo = async ()=>{
@@ -179,8 +189,8 @@ export default class MyCamera extends React.Component{
             permissionDialogTitle={'Permission to use camera'}
             permissionDialogMessage={'We need your permission to use your camera phone'}
         />
-        {this.renerText()}
-        <TouchableWithoutFeedback onPressIn={this.recordVideo} onPressOut={this.stopVideo}>
+        {this.renerText()}  
+        <TouchableWithoutFeedback onPress={this.takePicture} >
         <View style={styles.cameraButtonBox}>
            
           
