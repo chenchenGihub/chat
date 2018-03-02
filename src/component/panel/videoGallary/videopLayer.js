@@ -31,15 +31,19 @@ export default class VideoPLayer extends React.Component{
   
 
   render() {
+
+    console.log(this.props)
     return (
      <View style={styles.videoBox}>
-       <Video source={require("./Interstellar.mp4")}   // Can be a URL or a local file.
+       <Video 
+       source={{uri:this.props.videoUri.path}}   // Can be a URL or a local file.
+       //source={{uri:this.props.videoUri.path}}   // Can be a URL or a local file.
        ref={(ref) => {
          this.player = ref
        }}                                      // Store reference
        rate={1.0}                              // 0 is paused, 1 is normal.
        volume={1.0}                            // 0 is muted, 1 is normal.
-       muted={true}                           // Mutes the audio entirely.
+       muted={false}                           // Mutes the audio entirely.
        paused={false}                          // Pauses playback entirely.
        resizeMode="cover"                      // Fill the whole screen at aspect ratio.*
        repeat={true}                           // Repeat forever.
@@ -62,11 +66,13 @@ export default class VideoPLayer extends React.Component{
 const styles = StyleSheet.create({
   
   videoBox:{
-    //width:width,
-    //height:width*0.5,
-  },Video:{
     width:width,
     height:height*0.5,
+  },
+  Video:{
+    flex:1
+    // width:width,
+    // height:height*0.5,
   }
 });
 

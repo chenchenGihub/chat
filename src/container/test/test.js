@@ -60,8 +60,9 @@ export default class Test extends React.Component{
 //   
 
 
-  componentDidMount() {
-    //this.props.saveDatas(150,"Photos")
+  async componentDidMount() {
+    const data = await CameraRoll.getPhotos({first:1,assetType:"Videos"});
+    console.log(data)
   }
 
 	startRecording() {  

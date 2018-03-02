@@ -11,7 +11,8 @@ import {
 	Platform,
 	BackHandler,
 	ScrollView,
-	TouchableNativeFeedback
+	TouchableNativeFeedback,
+	KeyboardAvoidingView 
 }  from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -115,8 +116,11 @@ export default class Register extends React.PureComponent{
 	render(){
 		const TouchableBtn=Platform.OS==='ios'?TouchableOpacity:TouchableNativeFeedback
 		return(
-			<ScrollView>
-			<View style={styles.container}>
+			
+			<KeyboardAvoidingView
+				      style={styles.container}
+				      behavior={Platform.OS==="ios"?'padding':''}
+				  >
 			    {
 			    	Platform.OS==='ios'?
 			    	(<TouchableOpacity onPress={this.onBackPress}>
@@ -211,8 +215,9 @@ export default class Register extends React.PureComponent{
 						</View>
 					</TouchableBtn>
 				</View>
-			</View>
-			</ScrollView>
+				<View style={{ height: Platform.OS==="ios" ? width*0.20 :width*0.1}} />
+			</KeyboardAvoidingView>
+			
 			)
 		}
 	}

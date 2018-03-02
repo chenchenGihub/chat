@@ -3,6 +3,7 @@ import org.reactnative.camera.RNCameraPackage;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.horcrux.svg.SvgPackage;
 import com.brentvatne.react.ReactVideoPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -33,6 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new PickerPackage(),
             new SvgPackage(),
             new ReactVideoPackage(),
             new RNCameraPackage(),

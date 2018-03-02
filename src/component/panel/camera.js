@@ -21,9 +21,10 @@ import FontAwesome from  'react-native-vector-icons/FontAwesome';
 import Entypo from  'react-native-vector-icons/Entypo';
 import Ionicons from  'react-native-vector-icons/Ionicons';
 import SimpleLineIcons from  'react-native-vector-icons/SimpleLineIcons';
-import { RNCamera } from 'react-native-camera';
+//import { RNCamera } from 'react-native-camera';
+import Camera from 'react-native-camera';  
 
-import EditerVideo from './editerVideo';
+import EditerVideo from './camera/editerVideo';
 
 
 const { width,height } = Dimensions.get('window');
@@ -46,11 +47,13 @@ export default class MyCamera extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      type:"back",
+      aspect: Camera.constants.Aspect.fill, 
+      type:Camera.constants.Type.back,
       time:null,
       isModalVisible: false,
       openEditor:false,
-      videoUri:''
+      videoUri:'',
+      isRecording: false  
     };
   }
 
@@ -76,29 +79,29 @@ export default class MyCamera extends React.Component{
 
   try{
     if (this.camera) {
-      const options = { quality: RNCamera.Constants.VideoQuality['2160p'], maxDuration: 20,maxFileSize:1102410240,mute:false };
-      const data = await this.camera.recordAsync(options)
+      //const options = { quality: RNCamera.Constants.VideoQuality['2160p'], maxDuration: 20,maxFileSize:1102410240,mute:false };
+      const data = await this.camera.capture({mode: Camera.constants.CaptureMode.video})
       console.log(data);
       endTime=Date.now();
       clearInterval(timer)
-      // this.setState({
-      //   time:null,
-      //   videoUri:data
-      // })
+      this.setState({
+        //time:null,
+        videoUri:data
+      })
     }
   } catch(err){
     console.log(err)
   }finally{
-    console.log("finally")
+    
   }
     
   };
 
-  stopVideo = async ()=>{
+  stopVideo = ()=>{
     
-    console.log(1213)
-    await this.camera.stopRecording()
-    
+    // console.log(1213)
+    // await this.camera.stopRecording()
+    this.camera.stopCapture(); 
   }
 
   toggleFacing=()=> {
@@ -138,36 +141,23 @@ export default class MyCamera extends React.Component{
     return (<Text style={styles.text}>长按摄像</Text>)
   }
 
-  next=()=>{
+  next=(v)=>{
+    console.log(this.state.openEditor)
+
     this.setState({
-      openEditor:!this.state.openEditor
+      openEditor:v
     })
   }
 
-  renderNext=()=>{
-    
-      return (
-        <TouchableOpacity onPress={this.next}>
-          <View style={styles.nextBox}>
-          <Ionicons 
-          name="ios-arrow-round-forward" 
-          size={40}
-          color="#fc434f"
-          onPress={this.toggleFacing}
-        /> 
-        </View> 
-        </TouchableOpacity>
-        )
-   
-
-    
-  }
+  
 
   renderEditor=()=>{
     if(this.state.openEditor){
       return (<EditerVideo 
                 videoUri={this.state.videoUri}
-
+                modalVisible={this.state.openEditor}
+                toggle={this.next}
+                publishVideo={this.props.publishVideo}
               />)
     }
     return null
@@ -175,22 +165,22 @@ export default class MyCamera extends React.Component{
   }
 
   render() {
-   
+   console.log(this.state.time)
     return (
       <View style={styles.container}>
       {this.renderEditor()}
-        <RNCamera
+        <Camera
             ref={ref => {
               this.camera = ref;
             }}
             style = {styles.preview}
             type={this.state.type}
-            flashMode={RNCamera.Constants.FlashMode.on}
+            flashMode={Camera.constants.FlashMode.auto}
             permissionDialogTitle={'Permission to use camera'}
             permissionDialogMessage={'We need your permission to use your camera phone'}
         />
         {this.renerText()}  
-        <TouchableWithoutFeedback onPress={this.takePicture} >
+        <TouchableWithoutFeedback onPressIn={this.recordVideo} onPressOut={this.stopVideo}>
         <View style={styles.cameraButtonBox}>
            
           
@@ -207,15 +197,7 @@ export default class MyCamera extends React.Component{
         color="#fff" 
         onPress={()=>this.props.operate('picOrtext')}/>
         
-        <TouchableWithoutFeedback>
-          <View style={styles.nextBox}>
-            <Ionicons 
-              name="ios-arrow-round-forward" 
-              size={40}
-              color="#fc434f"
-            /> 
-          </View>
-        </TouchableWithoutFeedback>  
+        
           
         
        
@@ -225,12 +207,32 @@ export default class MyCamera extends React.Component{
           style={styles.reverseCamera}
           onPress={this.toggleFacing}
         /> 
-        {this.renderNext()}
+        {
+          this.state.time?
+           (<TouchableWithoutFeedback onPress={()=>this.next(true)}>
+            <View style={styles.nextBox}>
+            <Ionicons 
+            name="ios-arrow-round-forward" 
+            size={40}
+            color="#fc434f"
+            /> 
+          </View> 
+          </TouchableWithoutFeedback>)
+           :
+           null
+        }
+
         
-        <View style={styles.progressBox}>
-          <View style={[styles.progressBar,{width:(this.state.time/20)*width}]}/>
-        </View>
-        <Text style={styles.time}>{this.state.time}</Text>
+          {
+          this.state.time>0?
+        (<View style={styles.recordBox}>
+          <View style={styles.progressBox}>
+            <View style={[styles.progressBar,{width:(this.state.time/20)*width}]}/>
+          </View>
+          <Text style={styles.time}>{`${"🐶"}${this.state.time}${"😺"}`}</Text>
+        </View>)
+        : null
+        }
       </View>
     );
      
@@ -294,7 +296,7 @@ const styles = StyleSheet.create({
   },
   nextBox:{
     position: 'absolute',
-    bottom:width*0.1,
+    bottom:width*0.24,
     right:width*0.08,
     justifyContent: 'center',
     alignItems: 'center',
@@ -327,6 +329,9 @@ time:{
   color:"#fff",
   left:width*0.45,
   top:width*0.08
+},
+recordBox:{
+  position: 'absolute',
 }
 });
 

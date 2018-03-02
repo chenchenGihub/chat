@@ -14,7 +14,8 @@ import {
 	Keyboard,
 	Alert,
 	ScrollView ,
-	TouchableNativeFeedback 
+	TouchableNativeFeedback,
+	KeyboardAvoidingView 
 } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -74,6 +75,8 @@ export default class Login extends React.PureComponent{
   //   return true;
   // };
 
+ 
+
   	handleChange(key,v){
   		this.setState({
   			[key]:v
@@ -114,14 +117,17 @@ export default class Login extends React.PureComponent{
 	render(){
 		const TouchableBtn=Platform.OS==='ios'?TouchableOpacity:TouchableNativeFeedback
 		return(
-			<ScrollView 
-				keyboardShouldPersistTaps={'always'}
-			>
-				<View style={styles.container}>
+			
+				<KeyboardAvoidingView 
+					style={styles.container}
+					behavior={Platform.OS==="ios"?'padding':''}
+				>
 					<View style={styles.inputContainer}>
-							<LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={styles.LoginLog}>
-								<Text style={styles.logText}>登录</Text>
-							</LinearGradient>
+							{
+								<LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={styles.LoginLog}>
+									<Text style={styles.logText}>登录</Text>
+								</LinearGradient>
+							}
 						<View style={styles.textInputBox}>
 							<Icon  style={styles.loginIcon} name="user" size={25} color='#0087B0'/>
 							<TextInput
@@ -175,15 +181,18 @@ export default class Login extends React.PureComponent{
 							</TouchableBtn>
 						</View>	
 					</View>
-				</View>
-			</ScrollView>
+				
+
+			 <View style={{ height: Platform.OS==="ios" ? width*0.18:0 }} />
+    </KeyboardAvoidingView>
 			)
 	}
 }
 
 const styles = StyleSheet.create({
   container:{
-  	flex:1
+  	flex:1,
+  	paddingBottom: width*0.1,
   },
 	LoginLog:{
 		justifyContent: 'center',

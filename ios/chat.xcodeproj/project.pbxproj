@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00828E4BD1284B9CAD7B2586 /* libimageCropPicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5625F3619804C92ACDA7A0C /* libimageCropPicker.a */; };
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
 		00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302C01ABCB91800DB3ED1 /* libRCTImage.a */; };
@@ -45,6 +46,7 @@
 		394BEE729BDC47648FA83F93 /* libRNCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 544D6B10FCAD496FB909EFFD /* libRNCamera.a */; };
 		46B6BC1C44854AFE8AA41A77 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6C9BDE3810D476AB1A232F8 /* Zocial.ttf */; };
 		4D928FF96D884AF28EEF0DC9 /* libRCTVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D76D9FF130740FF884CDC9A /* libRCTVideo.a */; };
+		587551034143D6CC543AEA8F /* libPods-chatTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E77CC3F7E47040B0619821F /* libPods-chatTests.a */; };
 		5D2AC2F766324F4D981959BC /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 465376A56BBF4EA28AAA0CF5 /* Ionicons.ttf */; };
 		5E77F1942264434C912E1D94 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F0AB86D0C4945D9ACE91A56 /* MaterialIcons.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
@@ -52,8 +54,11 @@
 		717911191A714C98BCC72DC6 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6ABA39ABBBDC4FB2B7431CDA /* Entypo.ttf */; };
 		77FA5AC727E948A3AA8ED574 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9BC819E668F4B1C95C31C46 /* libRNSVG.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		8458396F0D79B1D14E51171A /* libPods-chat-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 37ADE6EFC4B268EFBDDF0CFE /* libPods-chat-tvOSTests.a */; };
+		A88CAC8BFF0159B8D6D7337F /* libPods-chat-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A311FB3625994C09F007931 /* libPods-chat-tvOS.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		BB58FAE1072B4DE8A10716AF /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2F2E29E2AB74E59858F665F /* SimpleLineIcons.ttf */; };
+		DF61903AF8AB12DB08CBD6A2 /* libPods-chat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 41734205C219C214C3B4BEFB /* libPods-chat.a */; };
 		E7F73FE8A2CD490FBA56814B /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8849DD55DC294191A6885D40 /* libRNImagePicker.a */; };
 		F14742DA2ECC42C3B1768D45 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22B85B17A28A4927BC69FBC5 /* MaterialCommunityIcons.ttf */; };
 		F66A8D1A04204B6DA67C7095 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A3BC577644C4CC68764F17D /* libBVLinearGradient.a */; };
@@ -313,6 +318,13 @@
 			remoteGlobalIDString = 641E28441F0EEC8500443AF6;
 			remoteInfo = "RCTVideo-tvOS";
 		};
+		33D115BC20483875000F3845 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 92FAE36FCC854DD8BF58D6C9 /* imageCropPicker.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3400A8081CEB54A6008A0BC7;
+			remoteInfo = imageCropPicker;
+		};
 		3DAD3E831DF850E9000B6D8A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */;
@@ -451,6 +463,7 @@
 		00E356EE1AD99517003FC87E /* chatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = chatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* chatTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = chatTests.m; sourceTree = "<group>"; };
+		0C66E459824AE54A4E5C4A78 /* Pods-chat-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chat-tvOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-chat-tvOSTests/Pods-chat-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -468,28 +481,41 @@
 		2D02E4901E0B4A5D006451C7 /* chat-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "chat-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DDBC0E135A447C78AC0D086 /* RNCamera.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNCamera.xcodeproj; path = "../node_modules/react-native-camera/ios/RNCamera.xcodeproj"; sourceTree = "<group>"; };
+		2E77CC3F7E47040B0619821F /* libPods-chatTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-chatTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		301257320468CDF0D345DA86 /* Pods-chatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chatTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chatTests/Pods-chatTests.debug.xcconfig"; sourceTree = "<group>"; };
 		335584DF20459F2F00176765 /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCameraRoll.xcodeproj; path = "../node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj"; sourceTree = "<group>"; };
 		33864388203D567900663271 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
+		37ADE6EFC4B268EFBDDF0CFE /* libPods-chat-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-chat-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F0AB86D0C4945D9ACE91A56 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		41734205C219C214C3B4BEFB /* libPods-chat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-chat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		465376A56BBF4EA28AAA0CF5 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		4C5F0D89A0DC4FDCAD1D6978 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
+		4FC2FC2242440257E276BF73 /* Pods-chatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-chatTests/Pods-chatTests.release.xcconfig"; sourceTree = "<group>"; };
+		50F945CBD6A42A1D4D576192 /* Pods-chat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chat.release.xcconfig"; path = "Pods/Target Support Files/Pods-chat/Pods-chat.release.xcconfig"; sourceTree = "<group>"; };
 		544D6B10FCAD496FB909EFFD /* libRNCamera.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNCamera.a; sourceTree = "<group>"; };
 		55132850E1214DBDA7212EDD /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		59BCA3DC511F4C1485349995 /* libRNDeviceInfo-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNDeviceInfo-tvOS.a"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		6ABA39ABBBDC4FB2B7431CDA /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
+		6CC9C0F4CC25722179B5A417 /* Pods-chat-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chat-tvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chat-tvOS/Pods-chat-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		73A4F83155FB45AEBB09C95F /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		7A3BC577644C4CC68764F17D /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = "<group>"; };
 		7A7AE3D804F645B6BAC5EC25 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
+		7B521986DB68C9EE3FE5C9CB /* Pods-chat-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chat-tvOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chat-tvOSTests/Pods-chat-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		883574F96C244B67B0729710 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		8849DD55DC294191A6885D40 /* libRNImagePicker.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNImagePicker.a; sourceTree = "<group>"; };
+		8F20149DB49C25A3DB56277E /* Pods-chat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chat/Pods-chat.debug.xcconfig"; sourceTree = "<group>"; };
+		91D519C91DBB0C1A1ABCEC01 /* Pods-chat-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chat-tvOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-chat-tvOS/Pods-chat-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		92FAE36FCC854DD8BF58D6C9 /* imageCropPicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = imageCropPicker.xcodeproj; path = "../node_modules/react-native-image-crop-picker/ios/imageCropPicker.xcodeproj"; sourceTree = "<group>"; };
+		9A311FB3625994C09F007931 /* libPods-chat-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-chat-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D76D9FF130740FF884CDC9A /* libRCTVideo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTVideo.a; sourceTree = "<group>"; };
 		A6C9BDE3810D476AB1A232F8 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		B06EEF63AEC84E259DB50206 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		B2F2E29E2AB74E59858F665F /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		B5625F3619804C92ACDA7A0C /* libimageCropPicker.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libimageCropPicker.a; sourceTree = "<group>"; };
 		C4F7DD9A0A17466EA0801D5B /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		C5176A869E104D0383FC9647 /* libRNDeviceInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNDeviceInfo.a; sourceTree = "<group>"; };
 		C9BC819E668F4B1C95C31C46 /* libRNSVG.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSVG.a; sourceTree = "<group>"; };
@@ -506,6 +532,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */,
+				587551034143D6CC543AEA8F /* libPods-chatTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,6 +563,8 @@
 				394BEE729BDC47648FA83F93 /* libRNCamera.a in Frameworks */,
 				4D928FF96D884AF28EEF0DC9 /* libRCTVideo.a in Frameworks */,
 				77FA5AC727E948A3AA8ED574 /* libRNSVG.a in Frameworks */,
+				00828E4BD1284B9CAD7B2586 /* libimageCropPicker.a in Frameworks */,
+				DF61903AF8AB12DB08CBD6A2 /* libPods-chat.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,6 +580,7 @@
 				2D02E4C61E0B4AEC006451C7 /* libRCTSettings-tvOS.a in Frameworks */,
 				2D02E4C71E0B4AEC006451C7 /* libRCTText-tvOS.a in Frameworks */,
 				2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */,
+				A88CAC8BFF0159B8D6D7337F /* libPods-chat-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,6 +588,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8458396F0D79B1D14E51171A /* libPods-chat-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -684,6 +715,10 @@
 			isa = PBXGroup;
 			children = (
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
+				41734205C219C214C3B4BEFB /* libPods-chat.a */,
+				9A311FB3625994C09F007931 /* libPods-chat-tvOS.a */,
+				37ADE6EFC4B268EFBDDF0CFE /* libPods-chat-tvOSTests.a */,
+				2E77CC3F7E47040B0619821F /* libPods-chatTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -732,6 +767,7 @@
 				544D6B10FCAD496FB909EFFD /* libRNCamera.a */,
 				9D76D9FF130740FF884CDC9A /* libRCTVideo.a */,
 				C9BC819E668F4B1C95C31C46 /* libRNSVG.a */,
+				B5625F3619804C92ACDA7A0C /* libimageCropPicker.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -789,6 +825,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		33D115B920483875000F3845 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				33D115BD20483875000F3845 /* libimageCropPicker.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		5E91572E1DD0AC6500FF2AA8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -796,6 +840,21 @@
 				5E9157351DD0AC6500FF2AA8 /* libRCTAnimation.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		67BA40F4F3541C4E09F43AB3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8F20149DB49C25A3DB56277E /* Pods-chat.debug.xcconfig */,
+				50F945CBD6A42A1D4D576192 /* Pods-chat.release.xcconfig */,
+				6CC9C0F4CC25722179B5A417 /* Pods-chat-tvOS.debug.xcconfig */,
+				91D519C91DBB0C1A1ABCEC01 /* Pods-chat-tvOS.release.xcconfig */,
+				7B521986DB68C9EE3FE5C9CB /* Pods-chat-tvOSTests.debug.xcconfig */,
+				0C66E459824AE54A4E5C4A78 /* Pods-chat-tvOSTests.release.xcconfig */,
+				301257320468CDF0D345DA86 /* Pods-chatTests.debug.xcconfig */,
+				4FC2FC2242440257E276BF73 /* Pods-chatTests.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		78C398B11ACF4ADC00677621 /* Products */ = {
@@ -832,6 +891,7 @@
 				2DDBC0E135A447C78AC0D086 /* RNCamera.xcodeproj */,
 				CD5A068CA9A8435080A9607A /* RCTVideo.xcodeproj */,
 				DCD33A8432934E44BD7876EF /* RNSVG.xcodeproj */,
+				92FAE36FCC854DD8BF58D6C9 /* imageCropPicker.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -855,6 +915,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				FAECDFA61D89466293A768CA /* Resources */,
 				3386433D203D52E300663271 /* Recovered References */,
+				67BA40F4F3541C4E09F43AB3 /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -906,9 +967,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "chatTests" */;
 			buildPhases = (
+				756EBB65561BE8349F4F9283 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
+				1D17789E5429F048D6734CDC /* [CP] Embed Pods Frameworks */,
+				140EDA4509E724313E326174 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -924,10 +988,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "chat" */;
 			buildPhases = (
+				48F239D008A4303525C8BD82 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				56F4054E39BEDDCE495413C7 /* [CP] Embed Pods Frameworks */,
+				75FFE2D5160329996827AAD8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -942,10 +1009,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "chat-tvOS" */;
 			buildPhases = (
+				A0E17D1149706A3BC1AC7D97 /* [CP] Check Pods Manifest.lock */,
 				2D02E4771E0B4A5D006451C7 /* Sources */,
 				2D02E4781E0B4A5D006451C7 /* Frameworks */,
 				2D02E4791E0B4A5D006451C7 /* Resources */,
 				2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */,
+				3C6CC9113F7CED08089DF521 /* [CP] Embed Pods Frameworks */,
+				E5D4589CD469CD68A28BF9BE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -960,9 +1030,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "chat-tvOSTests" */;
 			buildPhases = (
+				B8A350A8687DEBB1A01A2260 /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
 				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
 				2D02E48E1E0B4A5D006451C7 /* Resources */,
+				013B8B7556D85C98A23C9390 /* [CP] Embed Pods Frameworks */,
+				FDBB39F1CBFD623D9F797A0A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1017,6 +1090,10 @@
 				{
 					ProductGroup = 33864373203D52E800663271 /* Products */;
 					ProjectRef = E5218A93863D4B52B75D3616 /* BVLinearGradient.xcodeproj */;
+				},
+				{
+					ProductGroup = 33D115B920483875000F3845 /* Products */;
+					ProjectRef = 92FAE36FCC854DD8BF58D6C9 /* imageCropPicker.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
@@ -1348,6 +1425,13 @@
 			remoteRef = 33BFD4DA2040F2160075F3A0 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		33D115BD20483875000F3845 /* libimageCropPicker.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libimageCropPicker.a;
+			remoteRef = 33D115BC20483875000F3845 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		3DAD3E841DF850E9000B6D8A /* libRCTImage-tvOS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1536,6 +1620,51 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
+		013B8B7556D85C98A23C9390 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-chat-tvOSTests/Pods-chat-tvOSTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		140EDA4509E724313E326174 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-chatTests/Pods-chatTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1D17789E5429F048D6734CDC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-chatTests/Pods-chatTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1549,6 +1678,158 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		3C6CC9113F7CED08089DF521 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-chat-tvOS/Pods-chat-tvOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		48F239D008A4303525C8BD82 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-chat-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		56F4054E39BEDDCE495413C7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-chat/Pods-chat-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		756EBB65561BE8349F4F9283 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-chatTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		75FFE2D5160329996827AAD8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-chat/Pods-chat-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/QBImagePickerController/QBImagePicker.bundle",
+				"${PODS_ROOT}/RSKImageCropper/RSKImageCropper/RSKImageCropperStrings.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QBImagePicker.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RSKImageCropperStrings.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-chat/Pods-chat-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A0E17D1149706A3BC1AC7D97 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-chat-tvOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B8A350A8687DEBB1A01A2260 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-chat-tvOSTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E5D4589CD469CD68A28BF9BE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-chat-tvOS/Pods-chat-tvOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FDBB39F1CBFD623D9F797A0A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-chat-tvOSTests/Pods-chat-tvOSTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1617,6 +1898,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 301257320468CDF0D345DA86 /* Pods-chatTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1633,12 +1915,14 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-video/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
 				);
 				INFOPLIST_FILE = chatTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1660,6 +1944,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4FC2FC2242440257E276BF73 /* Pods-chatTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -1673,12 +1958,14 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-video/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
 				);
 				INFOPLIST_FILE = chatTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1700,6 +1987,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8F20149DB49C25A3DB56277E /* Pods-chat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1714,6 +2002,7 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-video/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
 				);
 				INFOPLIST_FILE = chat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1729,6 +2018,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 50F945CBD6A42A1D4D576192 /* Pods-chat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1742,6 +2032,7 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-video/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
 				);
 				INFOPLIST_FILE = chat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1757,6 +2048,7 @@
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6CC9C0F4CC25722179B5A417 /* Pods-chat-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1777,11 +2069,13 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-video/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
 				);
 				INFOPLIST_FILE = "chat-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1806,6 +2100,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 91D519C91DBB0C1A1ABCEC01 /* Pods-chat-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1826,11 +2121,13 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-video/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
 				);
 				INFOPLIST_FILE = "chat-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1855,6 +2152,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7B521986DB68C9EE3FE5C9CB /* Pods-chat-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1877,6 +2175,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.chat-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1888,6 +2187,7 @@
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C66E459824AE54A4E5C4A78 /* Pods-chat-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1901,6 +2201,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",

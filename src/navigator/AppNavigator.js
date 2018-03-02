@@ -69,12 +69,12 @@ componentDidMount() {
           //console.log(user)
          axios.post(`${port}/user/info`,{userId:user._id,deviceUniqueId:DeviceInfo.getUniqueID()}).then(res=>{
         if(res.status===200){
-         // console.log(res)
+          //console.log(res)
           if(res.data.code===0){
             socket.emit("setName",res.data.data._id)//用户上线
             this.props.updateUserInfo(res.data.data);
           }else{
-            console.log('not login')
+            //console.log('not login')
             this.props.navigation.dispatch(NavigationActions.navigate({"routeName":"Login"}));
           }
         }

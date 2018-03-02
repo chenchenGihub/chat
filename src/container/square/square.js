@@ -10,6 +10,8 @@ import {
 	StatusBar,
 	Platform,
 	Modal,
+	ProgressBar,
+	ProgressViewIOS,
 } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -36,76 +38,6 @@ import VideoRoll from "../../component/panel/videoRoll"
 
 
 const { width,height } = Dimensions.get('window');
-
-
-const videoUrl='https://vjs.zencdn.net/v/oceans.mp4';
-const thumnailUrl="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1494233305839&di=e1647289d1fcd778f64ddf3ccaf6fcfa&imgtype=0&src=http%3A%2F%2Ftupian.enterdesk.com%2F2012%2F1016%2Fgha%2F1%2F1350006791532.jpg";
-const data=[
-{
-	_id:Math.random(),
-	author:{
-		id:"12313213212421",
-		username:'afafafafdafdafa'
-	},
-	title:"的方法大方",
-	video:{
-		videoId:'aSAsaasad21321321321fasafa',
-		thumnail:thumnailUrl,
-		videoUrl:videoUrl,
-	}
-},
-{	_id:Math.random(),
-	author:{
-		id:"12313213212421",
-		username:'afafafafdafdafa'
-	},
-	title:"的方法大方",
-	video:{
-		videoId:'aSAsaasad21321321321fasafa',
-		thumnail:thumnailUrl,
-		videoUrl:videoUrl,
-	}
-},
-{	_id:Math.random(),
-	author:{
-		id:"12313213212421",
-		username:'afafafafdafdafa'
-	},
-	title:"的方法大方",
-	video:{
-		videoId:'aSAsaasad21321321321fasafa',
-		thumnail:thumnailUrl,
-		videoUrl:videoUrl,
-	}
-},
-{	_id:Math.random(),
-	author:{
-		id:"12313213212421",
-		username:'afafafafdafdafa'
-	},
-	title:"的方法大方",
-	video:{
-		videoId:'aSAsaasad21321321321fasafa',
-		thumnail:thumnailUrl,
-		videoUrl:videoUrl,
-	}
-},
-{	_id:Math.random(),
-	author:{
-		id:"12313213212421",
-		username:'afafafafdafdafa'
-	},
-	title:"的方法大方",
-	video:{
-		videoId:'aSAsaasad21321321321fasafa',
-		thumnail:thumnailUrl,
-		videoUrl:videoUrl,
-	}
-},
-];
-
-
-
 
 @connect(
 	state=>state,
@@ -150,6 +82,9 @@ takeVideo=async ()=>{
 // 				/>)
 // 	}
 
+_publishVideo=(v)=>{
+	console.log(v)
+}
 
 operate(v){
 	console.log("v",v)
@@ -166,7 +101,10 @@ renderPanelContainer=()=>{
 	if(this.state.choice=='picOrtext'){
 		return (<Panel operate={this.operate}/>)
 	}else if(this.state.choice=='capatureVideo'){
-		return (<MyCamera operate={this.operate}/>)
+		return (<MyCamera 
+				operate={this.operate}
+				publishVideo={this._publishVideo}
+			/>)
 	}else{
 			return (<VideoRoll operate={this.operate}/>)
 	}	
@@ -189,11 +127,18 @@ renderPanelContainer=()=>{
 	          visible={this.state.modalVisible}
 	          onRequestClose={() => {this.setState({modalVisible:!this.state.modalVisible})}}
 	          >
-	          
 	          {this.renderPanelContainer()}
-	          
-	         
         	</Modal>
+
+        	 {/*<ProgressViewIOS 
+        	 	style={styles.progressView} 
+        	 	progressTintColor="purple" 
+        	 	progress={0.2}
+        	 	progressViewStyle="bar"
+        	 	trackTintColor="blue"
+        	 	//trackImage=""
+        	 />*/}
+        	
 		</View>		
 		)
 	}
@@ -216,6 +161,11 @@ const styles = StyleSheet.create({
 		color:'#f8f9fd',
 		fontSize: 20,
 	},
+  progressView: {
+    marginTop: 20,
+    marginLeft:10,
+    marginRight:10,
+  }
 });
 
 
