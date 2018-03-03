@@ -12,19 +12,18 @@ import {
 	Modal,
 	ProgressBar,
 	ProgressViewIOS,
+	Image
 } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Header,SearchBar } from 'react-native-elements';
-//import Geolocation from 'Geolocation';
-
-
 import axios from 'axios';
 import autobind from 'autobind-decorator';
 import Drawer from 'react-native-drawer';
 import { RNCamera } from 'react-native-camera';
 import Video from 'react-native-video';
 import Popover, { PopoverTouchable } from 'react-native-modal-popover';
+
 import { loadData } from '../../redux/data.redux'
 import Avatar from '../../component/topheader/avatar'
 import Title from '../../component/topheader/title'
@@ -35,9 +34,14 @@ import DataContainer from "../../component/datas/datacontainer"
 import Panel from "../../component/panel/panel"
 import MyCamera from "../../component/panel/camera"
 import VideoRoll from "../../component/panel/videoRoll"
+import ProgressBox from "../../component/progressbar/progressbar"
+import { uploadFormData } from "../../utils/httpUtils.js"
+import Constants from "../../constant/constant.js"
 
 
 const { width,height } = Dimensions.get('window');
+
+const xhr=null;
 
 @connect(
 	state=>state,
@@ -50,27 +54,15 @@ constructor(props) {
   super(props);
 
   this.state = {
-  	modalVisible:false
+  	modalVisible:false,
+  	progress:0,
+  	uploading:true
   };
 
   this.operate=this.operate.bind(this)
+  this.videoUri='';
 }
 
-	takePicture = async function() {
-    if (this.camera) {
-      const options = { quality: 0.5, base64: true,exif:true };
-      const data = await this.camera.takePictureAsync(options)
-      console.log(data);
-    }
-  };
-
-takeVideo=async ()=>{
-	if (this.camera) {
-      const options = { quality: RNCamera.Constants.VideoQuality['2160p'], maxDuration: 15,maxFileSize:10240,mute:false };
-      const data = await this.camera.recordAsync()
-      console.log(data);
-    }
-}
 
 // _keyExtractor=(item, index)=>(item._id).toString();
 
@@ -83,7 +75,67 @@ takeVideo=async ()=>{
 // 	}
 
 _publishVideo=(v)=>{
-	console.log(v)
+	console.log(v.videoUri)
+	this.operate('picOrtext');	
+	this._upload(uploadFormData(v.videoUri,"video"),v.videoUri);
+
+}	
+
+
+_upload(body,uri){
+
+	this.setState({
+              uploading:true
+            })
+	this.setVideouri(uri);
+
+  	 xhr = new XMLHttpRequest();
+
+        let url = Constants.CLOUDINARY.video;
+
+        xhr.open("POST",url);
+
+        xhr.onload = () => {
+          if (xhr.status === 200) {
+            this.setState({
+              uploading:false
+            })
+            let response=JSON.parse(xhr.responseText);
+            console.log("response",response)
+            
+          } else {
+            console.warn('error');
+          }
+        }
+
+        xhr.onabort = ()=>{
+		    alert("The transfer has been canceled by the user.");
+		}
+
+        xhr.upload.onprogress=(event)=>{
+          //console.log(event)
+
+          if(event.lengthComputable){
+				this.setState({
+					progress:event.loaded/event.total
+				})
+			}
+        }
+      xhr.send(body);
+}
+
+_abort=()=>{
+	console.log("abort")
+	xhr.abort()
+	
+}
+
+setVideouri(v){
+	this.videoUri=v;
+}
+
+getVideouri(){
+	return this.videoUri
 }
 
 operate(v){
@@ -113,6 +165,8 @@ renderPanelContainer=()=>{
 	
 	render(){
 
+		console.log(this.state)
+
 		return(
 			<View style={styles.container}>
 					<Header
@@ -130,14 +184,15 @@ renderPanelContainer=()=>{
 	          {this.renderPanelContainer()}
         	</Modal>
 
-        	 {/*<ProgressViewIOS 
-        	 	style={styles.progressView} 
-        	 	progressTintColor="purple" 
-        	 	progress={0.2}
-        	 	progressViewStyle="bar"
-        	 	trackTintColor="blue"
-        	 	//trackImage=""
-        	 />*/}
+        	{
+        		this.state.uploading&&!!this.state.progress?
+	        	<ProgressBox
+	        	 	progress={this.state.progress}
+	        	 	videothumb={this.getVideouri()}
+	        	 	abort={this._abort}
+	        	 />
+	        	 :null
+        	}
         	
 		</View>		
 		)

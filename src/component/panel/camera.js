@@ -82,7 +82,7 @@ export default class MyCamera extends React.Component{
       //const options = { quality: RNCamera.Constants.VideoQuality['2160p'], maxDuration: 20,maxFileSize:1102410240,mute:false };
       const data = await this.camera.capture({mode: Camera.constants.CaptureMode.video})
       console.log(data);
-      endTime=Date.now();
+      
       clearInterval(timer)
       this.setState({
         //time:null,
@@ -102,6 +102,7 @@ export default class MyCamera extends React.Component{
     // console.log(1213)
     // await this.camera.stopRecording()
     this.camera.stopCapture(); 
+    endTime=Date.now();
   }
 
   toggleFacing=()=> {
@@ -165,7 +166,7 @@ export default class MyCamera extends React.Component{
   }
 
   render() {
-   console.log(this.state.time)
+   //console.log(this.state.time)
     return (
       <View style={styles.container}>
       {this.renderEditor()}

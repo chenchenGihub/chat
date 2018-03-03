@@ -14,10 +14,8 @@ const emoji=[
 ['😀','😁','😅','😆','😉','😊','😋','😎','😘','🤗','😪','🤐','😛','😓','😲','😞','😭','😨','😡'],
 ['😳','😱','🤢','🤧','😺','😸','♀','👵','♂️️','🤳','💪','👈','👉','👟','👞','🐔','🌹','🥀','🐶','🌺']
 ];
-export default emoji;
 
-
-export const CLOUDINARY = {
+const CLOUDINARY = {
   cloud_name: 'dqfktbdqw',  
   api_key: '982239126941818',  
   api_secret: 'HZHGi5k2hTRpr40Bex9E6NMJKVU', 
@@ -25,4 +23,11 @@ export const CLOUDINARY = {
   video:'https://api.cloudinary.com/v1_1/dqfktbdqw/video/upload',
   audio:'https://api.cloudinary.com/v1_1/dqfktbdqw/raw/upload',
 };
+export default {
+	emoji,
+	CLOUDINARY
+};
+
+
+
 

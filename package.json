@@ -16,6 +16,7 @@
     "expo": "^25.0.0",
     "lodash": "^4.17.5",
     "moment": "^2.20.1",
+    "native-base": "^2.3.9",
     "pinyin": "^2.8.3",
     "prop-types": "^15.6.0",
     "react": "16.2.0",

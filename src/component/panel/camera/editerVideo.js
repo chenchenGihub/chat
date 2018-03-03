@@ -18,9 +18,11 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import sha1 from 'sha1';
 import * as Progress from 'react-native-progress';
+import { Toast } from 'antd-mobile';
 
 import ToastUtils from '../../../utils/utils';
 import VideoPLayer from '../videoGallary/videopLayer';
+import { uploadfile } from '../../../utils/httpUtils';
 
 
 
@@ -44,10 +46,14 @@ export default class EditerVideo extends React.Component{
     this.state = {
       text:'',
       checked:false,
-      uploading:false
+      uploading:false,
+      videoUri:this.props.videoUri.path
     };
 
   }
+
+
+  
 	
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
@@ -59,72 +65,24 @@ export default class EditerVideo extends React.Component{
     })
   }
 
-  publishVideo=()=>{
+//   publishVideo = async()=>{
+//       console.log(this.props.videoUri.path)
+// try{
+//   const data = await uploadfile(this.props.videoUri.path);
+//   console.log(data)
+// }catch(err){
+//   console.warn(err)
+// }finally{
+  
+// }
+  
+
+       
+// }
 
 
-        if(this.state.uploading){
-          ToastUtils(Platform.OS,"请勿重复提交")
-        }
 
-        this.setState({
-          uploading:true
-        })
-
-         /**
-           * 上传图片到服务器
-           */
-            
-        console.log("arr",this.props.videoUri.path)
-
-        let timestamp = Date.now();
-        let tags = 'app,video';
-        let folder = 'video';
-
-        let signature=`folder=${folder}&tags=${tags}&timestamp=${timestamp+CLOUDINARY.api_secret}`;
-        signature=sha1(signature);
-
-
-        const body = new FormData();
-        body.append('file', {uri: this.props.videoUri.path, type: 'video/mp4', name: 'testvideo.mp4'});
-        body.append('folder',folder);
-        body.append('signature',signature);
-        body.append('tags',tags);
-        body.append('timestamp',timestamp);
-        body.append('api_key',CLOUDINARY.api_key);
-        body.append('resource_type','video');
-        //body.append('file',file[0]); 
-
-        this._upload(body);
-  }
-
-
-  _upload=(body)=>{
-  const xhr = new XMLHttpRequest();
-
-        let url = CLOUDINARY.video;
-
-        xhr.open("POST",url);
-
-        xhr.onload = () => {
-          if (xhr.status === 200) {
-            this.setState({
-              uploading:true
-            })
-            let response=JSON.parse(xhr.responseText);
-            console.log("response",response)
-            
-           // response.secure_url && Toast.success('头像上传成功!!!', 1);
-
-
-          } else {
-            console.warn('error');
-          }
-        }
-        xhr.upload.onprogress=(event)=>{
-          //console.log(event)
-        }
-      xhr.send(body);
-}
+  
 
   render() {
     console.log(this.props)
@@ -184,7 +142,10 @@ export default class EditerVideo extends React.Component{
                   />
             </View>
           </ScrollView>
-          <TouchableButton onPress={()=>{this.props.publishVideo(this.state)}}>
+          <TouchableButton onPress={()=>{
+            this.props.toggle(false)
+            this.props.publishVideo(this.state)
+          }}>
             <View style={styles.button}>
                 <Text style={styles.btnText}>发布</Text>
             </View>
