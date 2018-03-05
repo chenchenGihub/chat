@@ -28,3 +28,31 @@ export function loadData(){
 		//axios
 	}
 }
+
+export function publish({title,body,thumbnail}){
+	return (dispatch,getState)=>{
+		console.log(title,body,thumbnail,getState().users)
+		axios.post(`${port}/user/uploadResource`,{
+			title,
+			body,
+			thumbnail,
+			authorId:getState().users._id,
+			authorAvatar:getState().users.avatarurl,
+			authorName:getState().users.userName
+		}).then(res=>{
+					if(res.status===200&&res.data.code===0){
+						console.log("res.data",res.data.data)
+
+						//dispatch(userList(res.data.data))
+					}else{
+						
+					}
+				})
+
+	}
+}
+
+
+
+
+

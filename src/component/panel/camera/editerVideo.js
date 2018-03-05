@@ -20,7 +20,7 @@ import sha1 from 'sha1';
 import * as Progress from 'react-native-progress';
 import { Toast } from 'antd-mobile';
 
-import ToastUtils from '../../../utils/utils';
+import { ToastUtils  } from '../../../utils/utils';
 import VideoPLayer from '../videoGallary/videopLayer';
 import { uploadfile } from '../../../utils/httpUtils';
 
@@ -143,6 +143,9 @@ export default class EditerVideo extends React.Component{
             </View>
           </ScrollView>
           <TouchableButton onPress={()=>{
+            if(!this.state.videoUri){
+              ToastUtils(Platform.OS,"稍等...",300)
+            }
             this.props.toggle(false)
             this.props.publishVideo(this.state)
           }}>

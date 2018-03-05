@@ -24,7 +24,7 @@ import { RNCamera } from 'react-native-camera';
 import Video from 'react-native-video';
 import Popover, { PopoverTouchable } from 'react-native-modal-popover';
 
-import { loadData } from '../../redux/data.redux'
+import { loadData,publish } from '../../redux/data.redux'
 import Avatar from '../../component/topheader/avatar'
 import Title from '../../component/topheader/title'
 import RightComponent from '../../component/header/rightcomponent'
@@ -45,7 +45,7 @@ const xhr=null;
 
 @connect(
 	state=>state,
-	{loadData}
+	{loadData,publish}
 	)
 export default class Square extends React.Component{
 	
@@ -75,19 +75,19 @@ constructor(props) {
 // 	}
 
 _publishVideo=(v)=>{
-	console.log(v.videoUri)
+	console.log(v)
 	this.operate('picOrtext');	
-	this._upload(uploadFormData(v.videoUri,"video"),v.videoUri);
+	this._upload(uploadFormData(v.videoUri,"video"),v);
 
 }	
 
 
-_upload(body,uri){
+_upload(body,v){
 
 	this.setState({
               uploading:true
             })
-	this.setVideouri(uri);
+	this.setVideouri(v.videoUri);
 
   	 xhr = new XMLHttpRequest();
 
@@ -101,8 +101,11 @@ _upload(body,uri){
               uploading:false
             })
             let response=JSON.parse(xhr.responseText);
-            console.log("response",response)
-            
+            console.log("response",response,response.secure_url.substring(0,response.secure_url.lastIndexOf('/')));
+            //console.log(response.secure_url.substring(0,response.secure_url.lastIndexOf('/'))+response.public_id.substring(response.public_id.indexOf("/"))+".jpg")
+            let thumbnail=response.secure_url.substring(0,response.secure_url.lastIndexOf('/'))+response.public_id.substring(response.public_id.indexOf("/"))+".jpg"
+            this.props.publish({title:v.text,body:response.secure_url,thumbnail:thumbnail})
+
           } else {
             console.warn('error');
           }
