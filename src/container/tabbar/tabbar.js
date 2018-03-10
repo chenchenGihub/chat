@@ -26,8 +26,10 @@ import UserList from '../userlist/userlist'
 import Square from '../square/square'
 import Mine from '../mine/mine'
 import Test from '../test/test'
+import TopBar from '../topbar/topbar'
 
 import { getMsgList,sendMsg,receiveMsg } from '../../redux/chat.redux'
+import { loadData } from '../../redux/data.redux';
 
 const AnimatedIcon = Animated.createAnimatedComponent(Icon);
 
@@ -40,16 +42,16 @@ type State = NavigationState<
 >;
 
 const initialLayout = {
-  height: 0,
+  height: Dimensions.get('window').width*0.12,
   width: Dimensions.get('window').width,
 };
 
 
 @connect(
   state=>state,
-  {getMsgList,receiveMsg }
+  {getMsgList,receiveMsg,loadData}
   )
-export default class TabBarIcon extends React.Component<*, State> {
+export default class TabBarIcon extends React.PureComponent<*, State> {
   
 
 
@@ -64,8 +66,9 @@ export default class TabBarIcon extends React.Component<*, State> {
         color: '#F44336',
       },
       { key: '3', title: '广场', icon: 'windows', color: '#3F51B5' },
-      {key: '4', title: 'test', icon: 'windows', color: '#3F51B5' }
+     // {key: '4', title: 'test', icon: 'windows', color: '#3F51B5' }
     ],
+    topbarindex:1
   };
 
   componentDidMount() {
@@ -73,6 +76,7 @@ export default class TabBarIcon extends React.Component<*, State> {
       this.props.getMsgList();
       
       this.props.receiveMsg();
+     // this.props.loadData()
   }
 
   _handleIndexChange = index =>{
@@ -82,6 +86,12 @@ export default class TabBarIcon extends React.Component<*, State> {
     });
   }
     
+   _handleTopIndexChange=(v)=>{
+    //console.log(v)
+      this.setState({
+        topbarindex:v
+      });
+   } 
 
   _renderIndicator = props => {
     const { width, position } = props;
@@ -168,15 +178,18 @@ export default class TabBarIcon extends React.Component<*, State> {
   );
 
   _renderScene = ({ route }) => {
+  //console.log(this.state.index,this.state.routes.indexOf(route),route)
+  //   if (Math.abs(this.state.index - this.state.routes.indexOf(route)) >1) {
+  //   return null;
+  // }
     //console.log(route)
     switch(route.key){
       case '1':
-        return <Msg  state={this.state} openControlPanel={this._openControlPanel}/>
+        return <Msg state={this.state} openControlPanel={this._openControlPanel}/>
       case '2':
         return <UserList state={this.state} openControlPanel={this._openControlPanel}/>
       case '3':
-        return <Square state={this.state} openControlPanel={this._openControlPanel}/> 
-       case '4': return <Test state={this.state} openControlPanel={this._openControlPanel}/> 
+        return <TopBar state={this.state} handleTopIndexChange={this._handleTopIndexChange} openControlPanel={this._openControlPanel}/>
     }
   };
 
@@ -186,6 +199,7 @@ export default class TabBarIcon extends React.Component<*, State> {
     }
 
   render() {
+    //console.log(this.state.topbarindex)
     return (
       <Drawer
        //type='static'
@@ -195,12 +209,12 @@ export default class TabBarIcon extends React.Component<*, State> {
            //styles={drawerStyles}
            //panCloseMask={0.2}
            tweenHandler={(ratio) => ({
-          main: { opacity:(2-ratio)/2 }
-         })}
+            main: { opacity:(2-ratio)/2 }
+          })}
          tweenDuration={100}
          tweenEasing={"linear"}
          //panThreshold={0.5}
-         panOpenMask={0.8}
+         panOpenMask={this.state.index!==2 ? 0.8:0}
          initializeOpen={false}
          side={'left'}
          useInteractionManager={true}
@@ -218,6 +232,8 @@ export default class TabBarIcon extends React.Component<*, State> {
               onIndexChange={this._handleIndexChange}
               animationEnabled={false}
               swipeEnabled={false}
+              initialLayout={initialLayout}
+              useNativeDriver
             />
       </Drawer>  
     );

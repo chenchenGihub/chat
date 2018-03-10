@@ -96,8 +96,9 @@ const styles = StyleSheet.create({
   	flex:1
   },
   contentBox:{
-  	flex:1,
-    backgroundColor: "#b5b7b7",
+    width:width,
+    height:width*0.084,
+    backgroundColor: "#838383",
   },
   progressbarBox:{
   	width:width,

@@ -179,38 +179,46 @@ Router.post('/uploadResource',function(req,res){
 		title,
 		//desc,
 		authorId,
-		authorName,
-		authorAvatar,
 		body,
 		thumbnail 
 		} = req.body;
-	
+			
+//console.log({...req.body})
 
 		const dataSource=new DataSource({
 			title:  title,
     		//desc:desc,
-    		author: {
-    			authorId:authorId,
-				authorName:authorName,
-				authorAvatar:authorAvatar
-    		},
-    		body:   body,
+    		author:authorId,
+    		body:body,
     		thumbnail:thumbnail
 		});	
 
-		console.log({...req.body})
+		//console.log({...req.body})
 
 		dataSource.save(function(err,doc){
 			if(err){
 				return res.json({code:1,msg:"服务器端发生错误,发布失败!"})
 			}
 			const { author,_id } = doc;
-			console.log(doc)
+			//console.log(doc)
 			return res.json({code:0,data:{ author,_id }})
 		})
 
 	
 })
+
+Router.get('/loadDatalist',function(req,res){
+	
+
+	DataSource.find({},function(err,doc){
+		
+		return res.json({code:0,data:doc})
+		
+	})
+	
+})
+
+
 
 
 function salt(pwd){

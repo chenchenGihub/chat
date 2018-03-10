@@ -107,7 +107,7 @@ export default class UserList extends React.Component{
 	render(){
 		
 		const { userList } = this.props.chatUser;
-		//console.log(userList)
+		console.log(userList)
 
 		return(
 				<View style={styles.container}>

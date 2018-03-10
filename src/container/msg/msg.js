@@ -50,7 +50,7 @@ export default class Msg extends React.Component{
 
 	render(){
 
-		//console.log(this.props)
+		//console.log("msg",this.props)
 
 		const { _id }= this.props.users;
 

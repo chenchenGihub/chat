@@ -14,12 +14,13 @@ import {
   ScrollView,
   PermissionsAndroid,
   TouchableWithoutFeedback,
-  CameraRoll
+  BackHandler
 } from 'react-native';
 import FontAwesome from  'react-native-vector-icons/FontAwesome';
 import EvilIcons from  'react-native-vector-icons/EvilIcons';
 import Ionicons from  'react-native-vector-icons/Ionicons';
 import Video from "react-native-video";
+import ImagePicker from 'react-native-image-crop-picker';
 const { width,height } = Dimensions.get('window');
 
 import  VideoPLayer from './videoGallary/videopLayer.js';
@@ -33,54 +34,34 @@ export default class VideoRoll extends React.Component{
 
  
 
-    next=()=>{
+  componentDidMount() {
+      ImagePicker.openPicker({
+      mediaType: "video",
+    }).then((video) => {
+      
+        console.log(video);
 
-    }
+    }).catch((error) => { 
+      
+      console.log(error) });
 
 
-  async  componentWillMount() {
-       
-  const data = await CameraRoll.getPhotos({
-                first:20,
-                assetType:"Videos"
-             })    
-                 console.log(data); 
+    BackHandler.addEventListener('hardwareBackPress', function() {
+      this.props.operate('')
+    });
 
-                 // let videos=[];
-                 // data.edges.map((v,i)=>{
-                 //     videos.push(v.node.image)
-                 // })   
 
-                 console.log(data.edges)
-
-                 this.setState({
-                  videos:data.edges
-                 })
   }
-    
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener("hardwareBackPress", ()=>console.log("unmount"))
+    this.props.operate('')
+  }
+
+
 
   render() {
-    return (
-     <ScrollView style={styles.container}>
-     <View style={styles.header}>
-       <EvilIcons 
-       name="close" 
-       size={30} 
-       color="#fff"
-       onPress={()=>this.props.operate('picOrtext')}
-       />
-       <TouchableOpacity onPress={this.next}>
-         <View style={styles.next}>
-          <Text style={styles.nextText}>下一步</Text>
-        </View>
-       </TouchableOpacity>
-     </View>
-       <VideoPLayer />
-       <VideoGallary
-         data={this.state.videos}
-       />
-     </ScrollView>
-    );
+    return (<View><Text>123</Text></View>)
   }
 }
 const styles = StyleSheet.create({

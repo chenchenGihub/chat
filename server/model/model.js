@@ -39,6 +39,12 @@ const models={
 			FirstInstallTime:{type:String},
 			LastUpdateTime:{type:String},
 			Carrier:{type:String},
+			plublish:[{type: mongoose.Schema.Types.ObjectId, ref: 'DataSource' }],
+			repost:[{type: mongoose.Schema.Types.ObjectId, ref: 'RepostSource' }],
+			fans: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+			mysubscribes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+			history:[{type: mongoose.Schema.Types.ObjectId, ref: 'DataSource' }],
+			fav:[{type: mongoose.Schema.Types.ObjectId, ref: 'DataSource' }]
 		},
 		chat:{
 			chatId:{type:String,require:true},
@@ -50,34 +56,56 @@ const models={
 			isShowTime:{type:Boolean,require:true,default:true}
 		},
 		dataSource:{
-			title:  {type:String,default:""},
+			title:  {type:String},
     		desc:{type:String,default:""},
-    		author: {
-    			authorId:{type:mongoose.Schema.Types.ObjectId,require:true},
-				authorName:{type:String},
-				authorAvatar:{type:String}
-    		},
-    		body:   {type:String,require:true},
-    		thumbnail:{type:String,require:true},
-    		//comments: [{ body: String, date: Date }],
+    		author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    		body:   {type:mongoose.Schema.Types.Mixed},
+    		thumbnail:{type:String},
+    		votes:[{type:mongoose.Schema.Types.ObjectId, ref: 'User'}],
+    		comments: [{ type:mongoose.Schema.Types.ObjectId,ref: 'ParentComments' }],
+    		repost:[{ type:mongoose.Schema.Types.ObjectId,ref: 'RepostSource' }],
+    		fav:[{type:mongoose.Schema.Types.ObjectId, ref: 'User'}],
     		date: { type: Date, default: Date.now },
     		hidden: { type:Boolean,default:false },
     		label:{type:Array},
     		meta: {
       			votes: { type:Number,default:undefined},
-      			favs:  { type:Number,default:undefined},
-      			comments:{ type:Number,default:undefined}
+      			repost:  { type:Number,default:undefined},
+      			comments:{ type:Number,default:undefined},
+      			reads:{type:Number,default:undefined}
     		}
+		},
+		repostSource:{
+			repostTitle:{
+				type:String,
+				set:function(v){
+
+					return v
+				}
+			},
+			repostor:{
+				type: mongoose.Schema.Types.ObjectId, ref: 'User',require:true
+			},
+			dataSourceId:{type: mongoose.Schema.Types.ObjectId, ref: 'DataSource' },
+			comments: [{ type:mongoose.Schema.Types.ObjectId,ref: 'ParentComments' }],
+    		repost:[{ type:mongoose.Schema.Types.ObjectId,ref: 'RepostSource' }],
+    		votes:[{type:mongoose.Schema.Types.ObjectId, ref: 'User',require:true}],
+			meta:{
+			 	votes: { type:Number,default:undefined},
+      			repost:  { type:Number,default:undefined},
+      			comments:{ type:Number,default:undefined},
+      			reads:{type:Number,default:undefined}
+			 },
 		},
 		parentComments:{
 			dataId:{type:mongoose.Schema.Types.ObjectId,require:true},
 			commentor:{
-				commentorId:{type:mongoose.Schema.Types.ObjectId,require:true},
-				commentorName:{type:String},
-				commentorAvatar:{type:String}
+				type: mongoose.Schema.Types.ObjectId, ref: 'User',require:true
 			},
 			content:{type:mongoose.Schema.Types.Mixed,require:true},
+			votes:[{type:mongoose.Schema.Types.ObjectId, ref: 'User',require:true}],
 			date: { type: Date, default: Date.now },
+			childrenComments:[{type:mongoose.Schema.Types.ObjectId,require:true}],
 			meta: {
       			votes: Number,
       			comments:Number
@@ -86,17 +114,14 @@ const models={
 		childrenComments:{
 			parentCommentId:{type:mongoose.Schema.Types.ObjectId,require:true},
 			from:{
-				fromId:{type:mongoose.Schema.Types.ObjectId,require:true},
-				fromName:{type:String,require:true},
-				fromAvatar:{type:String,require:true}
+				type: mongoose.Schema.Types.ObjectId, ref: 'User',require:true
 			},
 			to:{
-				toId:{type:mongoose.Schema.Types.ObjectId,require:true},
-				toName:{type:String,require:true},
-				toAvatar:{type:String,require:true},
-				relateContent:{type:String,require:true}
+				type: mongoose.Schema.Types.ObjectId, ref: 'User',require:true
 			},
-			targetContent:{type:mongoose.Schema.Types.Mixed,require:true},
+			votes:[{type:mongoose.Schema.Types.ObjectId, ref: 'User',require:true}],
+			fromContent:{type:mongoose.Schema.Types.Mixed,require:true},
+			toContent:{type:mongoose.Schema.Types.Mixed,require:true},
 			date: { type: Date, default: Date.now },
 		},
 	}
@@ -104,6 +129,7 @@ const schema = new mongoose.Schema(models.user);
 const User=mongoose.model('User',schema);
 const Chat=mongoose.model('Chat',new mongoose.Schema(models.chat));
 const DataSource=mongoose.model('DataSource',new mongoose.Schema(models.dataSource));
+const RepostSource=mongoose.model('RepostSource',new mongoose.Schema(models.repostSource));
 const ParentComments=mongoose.model('ParentComments',new mongoose.Schema(models.parentComments));
 const ChildrenComments=mongoose.model('ChildrenComments',new mongoose.Schema(models.childrenComments));
 
@@ -113,6 +139,7 @@ module.exports={
 	User,
 	Chat,
 	DataSource,
+	RepostSource,
 	ParentComments,
 	ChildrenComments
 };

@@ -13,6 +13,10 @@ target 'chat' do
   target 'chat-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'lottie-ios', :path => '../node_modules/lottie-ios'
+
+    pod 'lottie-react-native', :path => '../node_modules/lottie-react-native'
+
   end
 
   target 'chatTests' do

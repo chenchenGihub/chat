@@ -19,14 +19,18 @@ import FontAwesome from  'react-native-vector-icons/FontAwesome';
 import Entypo from  'react-native-vector-icons/Entypo';
 import Ionicons from  'react-native-vector-icons/Ionicons';
 import Video from "react-native-video";
+import shallowequal from 'shallowequal';
 const { width,height } = Dimensions.get('window');
 
 
 export default class VideoPLayer extends React.Component{
 
- state = {
-    
-  };
+ 
+  shouldComponentUpdate(nextProps, nextState) {
+
+  //console.log(shallowequal(this.props.datalist, nextProps.datalist),shallowequal(this.state,nextState))
+  return !shallowequal(this.props.videoUri.path, nextProps.videoUri.path)
+}
 
   
 

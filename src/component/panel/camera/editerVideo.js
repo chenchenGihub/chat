@@ -19,6 +19,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import sha1 from 'sha1';
 import * as Progress from 'react-native-progress';
 import { Toast } from 'antd-mobile';
+import shallowequal from 'shallowequal';
 
 import { ToastUtils  } from '../../../utils/utils';
 import VideoPLayer from '../videoGallary/videopLayer';
@@ -45,15 +46,17 @@ export default class EditerVideo extends React.Component{
   
     this.state = {
       text:'',
-      checked:false,
-      uploading:false,
-      videoUri:this.props.videoUri.path
+      checked:false,      
     };
 
   }
 
-
-  
+componentWillUnmount() {
+  this.state = {
+      text:'',
+      checked:false,      
+    };
+}
 	
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
@@ -64,22 +67,6 @@ export default class EditerVideo extends React.Component{
       checked:!this.state.checked
     })
   }
-
-//   publishVideo = async()=>{
-//       console.log(this.props.videoUri.path)
-// try{
-//   const data = await uploadfile(this.props.videoUri.path);
-//   console.log(data)
-// }catch(err){
-//   console.warn(err)
-// }finally{
-  
-// }
-  
-
-       
-// }
-
 
 
   
@@ -143,11 +130,13 @@ export default class EditerVideo extends React.Component{
             </View>
           </ScrollView>
           <TouchableButton onPress={()=>{
-            if(!this.state.videoUri){
+            if(!this.props.videoUri.path){
               ToastUtils(Platform.OS,"稍等...",300)
+              return
             }
-            this.props.toggle(false)
-            this.props.publishVideo(this.state)
+            this.props.toggle(false);
+            this.props.publishVideo({text:this.state.text,videoUri:this.props.videoUri.path})
+            
           }}>
             <View style={styles.button}>
                 <Text style={styles.btnText}>发布</Text>

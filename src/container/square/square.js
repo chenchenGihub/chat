@@ -23,6 +23,7 @@ import Drawer from 'react-native-drawer';
 import { RNCamera } from 'react-native-camera';
 import Video from 'react-native-video';
 import Popover, { PopoverTouchable } from 'react-native-modal-popover';
+//import PullToRefresh from 'react-native-pull-refresh';
 
 import { loadData,publish } from '../../redux/data.redux'
 import Avatar from '../../component/topheader/avatar'
@@ -35,6 +36,7 @@ import Panel from "../../component/panel/panel"
 import MyCamera from "../../component/panel/camera"
 import VideoRoll from "../../component/panel/videoRoll"
 import ProgressBox from "../../component/progressbar/progressbar"
+import SquareContent from "../../component/squarecontent/squarecontent"
 import { uploadFormData } from "../../utils/httpUtils.js"
 import Constants from "../../constant/constant.js"
 
@@ -56,7 +58,8 @@ constructor(props) {
   this.state = {
   	modalVisible:false,
   	progress:0,
-  	uploading:true
+  	uploading:true,
+  	choice:''
   };
 
   this.operate=this.operate.bind(this)
@@ -64,15 +67,16 @@ constructor(props) {
 }
 
 
-// _keyExtractor=(item, index)=>(item._id).toString();
+
+// shouldComponentUpdate(nextProps, nextState) {
+//   return !shallowEqual(nextState,this.state)
+// }
 
 
-// 	renderDataItem=({item})=>{
-// 		return (<DataContainer
-// 					style={styles.DataItem}
-// 					dataItem={item}
-// 				/>)
-// 	}
+
+componentDidMount() {
+   this.props.loadData()
+}
 
 _publishVideo=(v)=>{
 	console.log(v)
@@ -168,12 +172,12 @@ renderPanelContainer=()=>{
 	
 	render(){
 
-		console.log(this.state)
+		//console.log(this.props.datalist)
 
 		return(
 			<View style={styles.container}>
 					<Header
-					  leftComponent={<Avatar source={this.props.users.avatarurl} style={styles.avatar} openControlPanel={this.props.openControlPanel}/>}
+					  leftComponent={<Avatar source={this.props.users.avatarurl} openControlPanel={this.props.openControlPanel}/>}
 					  centerComponent={<Title text={'广场'} style={styles.title}/>}
 					  rightComponent={<RightComponent operate={this.operate}/>}
 					/>
@@ -196,6 +200,11 @@ renderPanelContainer=()=>{
 	        	 />
 	        	 :null
         	}
+
+        	<SquareContent
+        	  platform={Platform.OS}
+        	  data={this.props.datalist}
+        	/>
         	
 		</View>		
 		)
