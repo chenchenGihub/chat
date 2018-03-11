@@ -43,11 +43,6 @@ export default class UserList extends React.Component{
 	  //BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
 	}
 
-	componentWillReceiveProps(nextProps:Object) {
-	  if(this.props.state.index===1){
-	  	//this._drawer.close()
-	  }
-	}
 
 	shouldComponentUpdate(nextProps:Object, nextState:Object) {
 

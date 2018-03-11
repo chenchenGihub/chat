@@ -2609,6 +2609,10 @@ immediate@^3.2.2:
   version "3.2.3"
   resolved "http://registry.npm.taobao.org/immediate/download/immediate-3.2.3.tgz#d140fa8f614659bd6541233097ddaac25cdd991c"
 
+immutable@^3.8.1:
+  version "3.8.2"
+  resolved "http://registry.npm.taobao.org/immutable/download/immutable-3.8.2.tgz#c2439951455bb39913daf281376f1530e104adf3"
+
 import-local@^1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/import-local/download/import-local-1.0.0.tgz#5e4ffdc03f4fe6c009c6729beb29631c2f8227bc"
@@ -4653,6 +4657,12 @@ react-native-elements@^0.19.0:
     opencollective "^1.0.3"
     prop-types "^15.5.8"
 
+react-native-fast-image@^2.2.6:
+  version "2.2.6"
+  resolved "http://registry.npm.taobao.org/react-native-fast-image/download/react-native-fast-image-2.2.6.tgz#1fd5115f4b15968af6a6f5ac62bab273dd5eb689"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-flexi-radio-button@^0.2.2:
   version "0.2.2"
   resolved "http://registry.npm.taobao.org/react-native-flexi-radio-button/download/react-native-flexi-radio-button-0.2.2.tgz#a0180393c531ba3477722c6e42a31ceb1c11623b"
@@ -4727,6 +4737,12 @@ react-native-keyboard-spacer@^0.4.1:
   version "0.4.1"
   resolved "http://registry.npm.taobao.org/react-native-keyboard-spacer/download/react-native-keyboard-spacer-0.4.1.tgz#46f18a320432098a25ea9fa89f5143dd254d332d"
 
+react-native-largelist@^1.2.7:
+  version "1.2.7"
+  resolved "http://registry.npm.taobao.org/react-native-largelist/download/react-native-largelist-1.2.7.tgz#10e259fe8f49581750b5136e2361f0e2b0fb481a"
+  dependencies:
+    prop-types "^15.6.0"
+
 react-native-lightbox@^0.7.0:
   version "0.7.0"
   resolved "http://registry.npm.taobao.org/react-native-lightbox/download/react-native-lightbox-0.7.0.tgz#e52b4d7fcc141f59d7b23f0180de535e35b20ec9"
@@ -4769,6 +4785,12 @@ react-native-modal@^5.0.1:
   dependencies:
     prop-types "15.6.0"
     react-native-animatable "^1.2.4"
+
+react-native-optimized-flatlist@^1.0.4:
+  version "1.0.4"
+  resolved "http://registry.npm.taobao.org/react-native-optimized-flatlist/download/react-native-optimized-flatlist-1.0.4.tgz#15c817ffb545e3c62e56a1b3c4654c1316414941"
+  dependencies:
+    prop-types "^15.6.0"
 
 react-native-parsed-text@^0.0.19:
   version "0.0.19"
@@ -4814,6 +4836,13 @@ react-native-swipeout@^2.2.2:
     create-react-class "^15.6.0"
     prop-types "^15.5.10"
     react-tween-state "^0.1.5"
+
+react-native-tab-navigator@^0.3.4:
+  version "0.3.4"
+  resolved "http://registry.npm.taobao.org/react-native-tab-navigator/download/react-native-tab-navigator-0.3.4.tgz#54a18f1ad06a09d4a0de81ff00416bc1b760c960"
+  dependencies:
+    immutable "^3.8.1"
+    prop-types "^15.5.10"
 
 react-native-tab-view@^0.0.70:
   version "0.0.70"

@@ -16,6 +16,9 @@ import {
   TabBar,
 } from 'react-native-tab-view';
 import type { Route, NavigationState } from 'react-native-tab-view/types';
+
+import TabNavigator from 'react-native-tab-navigator';
+
 import autobind from 'autobind-decorator';
 import Drawer from 'react-native-drawer'
 
@@ -27,6 +30,8 @@ import Square from '../square/square'
 import Mine from '../mine/mine'
 import Test from '../test/test'
 import TopBar from '../topbar/topbar'
+import {TabBottomNavigator} from './tabNavigator'
+
 
 import { getMsgList,sendMsg,receiveMsg } from '../../redux/chat.redux'
 import { loadData } from '../../redux/data.redux';
@@ -76,7 +81,7 @@ export default class TabBarIcon extends React.PureComponent<*, State> {
       this.props.getMsgList();
       
       this.props.receiveMsg();
-     // this.props.loadData()
+     this.props.loadData()
   }
 
   _handleIndexChange = index =>{
@@ -199,6 +204,8 @@ export default class TabBarIcon extends React.PureComponent<*, State> {
     }
 
   render() {
+   
+
     //console.log(this.state.topbarindex)
     return (
       <Drawer
@@ -224,7 +231,7 @@ export default class TabBarIcon extends React.PureComponent<*, State> {
          tapToClose={true}
          negotiatePan={true}//important!!
           >
-            <TabViewAnimated
+           {/* <TabViewAnimated
               style={this.props.style}
               navigationState={this.state}
               renderScene={this._renderScene}
@@ -234,7 +241,37 @@ export default class TabBarIcon extends React.PureComponent<*, State> {
               swipeEnabled={false}
               initialLayout={initialLayout}
               useNativeDriver
-            />
+            />*/}
+
+            <TabNavigator>
+              <TabNavigator.Item
+                selected={this.state.selectedTab === 'msg'}
+                title="消息"
+                renderIcon={() => <Icon name={"weibo"} size={30} style={styles.icon} />}
+                renderSelectedIcon={() => <Icon name={"weibo"} size={30} style={[styles.icon,{color:"#4fccff"}]} />}
+                badgeText="1"
+                onPress={() => this.setState({ selectedTab: 'msg' })}>
+                <Msg  openControlPanel={this._openControlPanel}/>
+              </TabNavigator.Item>
+              <TabNavigator.Item
+                selected={this.state.selectedTab === 'userlist'}
+                title="联系人"
+                renderIcon={() => <Icon name={"user"} size={30} style={styles.icon} />}
+                renderSelectedIcon={() => <Icon name={"user"} size={30} style={[styles.icon,{color:"#4fccff"}]} />}
+                //renderBadge={() => <CustomBadgeView />}
+                onPress={() => this.setState({ selectedTab: 'userlist' })}>
+                <UserList openControlPanel={this._openControlPanel}/>
+              </TabNavigator.Item>
+              <TabNavigator.Item
+                selected={this.state.selectedTab === 'topbar'}
+                title="广场"
+                renderIcon={() => <Icon name={"windows"} size={30} style={styles.icon} />}
+                renderSelectedIcon={() => <Icon name={"windows"} size={30} style={[styles.icon,{color:"#4fccff"}]} />}
+                //renderBadge={() => <CustomBadgeView />}
+                onPress={() => this.setState({ selectedTab: 'topbar' })}>
+                <TopBar  handleTopIndexChange={this._handleTopIndexChange} openControlPanel={this._openControlPanel}/>
+              </TabNavigator.Item>
+            </TabNavigator>
       </Drawer>  
     );
   }
@@ -253,7 +290,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     backgroundColor: 'transparent',
-    color: 'white',
+    color: '#3a3a3a',
   },
   label: {
     fontSize: 12,

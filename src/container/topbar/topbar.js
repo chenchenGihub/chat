@@ -54,7 +54,7 @@ constructor(props) {
 }
 
 componentDidMount() {
-  this.props.loadData()
+  //this.props.loadData()
   BackHandler.addEventListener('hardwareBackPress', function() {
       this.operate('');
     });
@@ -226,7 +226,7 @@ renderPanelContainer=()=>{
         
         <Tabs renderTabBar={()=> <ScrollableTab />}
               tabBarUnderlineStyle={{backgroundColor: "transparent",}}
-              initialPage={1}
+              initialPage={0}
               //locked
               //page={this.state.activeTab}
               //onChangeTab={(i) => {this.changeTab(i)}}
@@ -241,6 +241,7 @@ renderPanelContainer=()=>{
               <SquareContent
                 platform={Platform.OS}
                 data={this.props.datalist}
+                numberOfSections={1}
               />
            
           </Tab>

@@ -4,10 +4,17 @@ import {
 	Text,
 	FlatList,
 	Dimensions,
-	StyleSheet
+	StyleSheet,
+	Image
 } from 'react-native';
+
+import {OptimizedFlatList} from 'react-native-optimized-flatlist'
+import { LargeList } from "react-native-largelist";
+
+
 import { connect } from 'react-redux';
 import shallowequal from 'shallowequal';
+import autobind from 'autobind-decorator'
 
 import ContentItem from './contentitem/contentItem.js';
 import ListHeader from './listheader/listheader.js';
@@ -24,7 +31,9 @@ export default class SquareContent extends React.PureComponent{
 	constructor(props) {
 	  super(props);
 	
-	  this.state = {};
+	  this.state = {
+	  	refreshing:false
+	  };
 	}
 
 
@@ -54,6 +63,23 @@ export default class SquareContent extends React.PureComponent{
         return <View style={styles.separator}/>;
     }
 
+    @autobind
+    _hideOperate(){
+    	console.log("_hideOperate")
+    }
+    @autobind
+    _subscribe(){
+    	console.log("_subscribe")
+    }
+    @autobind
+    _sendcomment(){
+    	console.log("_sendcomment")
+    }
+    @autobind
+    _vote(){
+    	console.log("_vote")
+    }
+
 
 	_renderItemData=({item})=>{
 		//console.log(item)
@@ -66,33 +92,45 @@ export default class SquareContent extends React.PureComponent{
 					title={item.title}
 					content={item.body}
 					onPressItem={this.onPressItem}
+					hideOperate={this._hideOperate}
+					subscribe={this._subscribe}
+					AuthorBoxStyle={styles.AuthorBoxStyle}
+					OperationStyle={styles.OperationStyle}
+					sendcomment={this._sendcomment}
+					vote={this._vote}
+					ImageBoxStyle={styles.ImageBoxStyle}
 				/>
 				)
 	}
+
+
+
+	
+
+	
 
 	render(){
 		console.log(this.props)
 
 		const { data } = this.props.data;
 
-	
-
 
 		return(
 				<View style={{flex:1}}>
-				
                     <FlatList
                     	extraData={this.state}
                     	data={data}
                         ref={(flatList)=>this._flatList = flatList}
                         //ListHeaderComponent={this._header}
                         // ListFooterComponent={this._footer}
+                        removeClippedSubviews={false}
                         ItemSeparatorComponent={this._separator}
                         renderItem={this._renderItemData}
                         onRefresh={this.refreshing}
                         refreshing={false}
                         keyExtractor={this._keyExtractor}
                         onEndReachedThreshold={0.1}
+                        initialNumToRender={10}
                         onEndReached={
                             this._onload
                         }
@@ -106,8 +144,8 @@ export default class SquareContent extends React.PureComponent{
                         	return {length: width*0.6, offset: (width*0.6+6) * index, index}
                         }}
 
-                        >
-                    </FlatList>
+                        />
+                    
 				</View>
 
 			)
@@ -120,10 +158,33 @@ const styles=StyleSheet.create({
 		height:width*0.6,
 		backgroundColor: "#fff",
 	},
+	AuthorBoxStyle:{
+		width:width,
+		height:width*0.12,
+		backgroundColor: "#fff",
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-around',
+	},
+	OperationStyle:{
+		width:width,
+		height:width*0.12,
+		backgroundColor: "#FFF",
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-around',
+		borderTopWidth: 1,
+		borderTopColor: '#ede9e6',
+		borderStyle: 'solid',
+	},
 	separator:{
 		width:width,
 		height:6,
 		backgroundColor: "#ecf1ed",
+	},
+	ImageBoxStyle:{
+		flex:1,
+		backgroundColor: "red",
 	}
 })
 
