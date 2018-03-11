@@ -2,7 +2,7 @@ import React from 'react';
 import { 
   View,
   Text ,
-  TouchableOpacity,
+  TouchableWithoutFeedback,
   TouchableNativeFeedback,
   Platform,
 } from 'react-native';
@@ -11,6 +11,8 @@ import FastImage from 'react-native-fast-image';
 
 import  { AuthorBox } from './AuthorBox';
 import  { Operation } from './Operation';
+import  { ImageBox } from './ImageBox';
+import  { TitleBox } from './TitleBox';
 
 
 export default class ContentItem extends React.Component {
@@ -28,22 +30,27 @@ shouldComponentUpdate(nextProps, nextState) {
 
   render() {
    console.log(this.props)
-    const TouchableButton = Platform.OS==='ios'?TouchableOpacity:TouchableNativeFeedback
+    const TouchableButton = Platform.OS==='ios'?TouchableWithoutFeedback:TouchableNativeFeedback
     //const textColor = this.props.selected ? "red" : "black";
     return (
-      <TouchableButton onPress={this._onPress} >
+      
         <View style={this.props.contentItemstyle}>
-          <AuthorBox 
-            author={this.props.author}
-            subscribe={this.props.subscribe}
-            
-            publishtime={this.props.date}
-            hideOperate={this.props.hideOperate}
-            AuthorBoxStyle={this.props.AuthorBoxStyle}
-          />
+          <TouchableButton onPress={this._onPress} >
+          <View>
+              <AuthorBox 
+                author={this.props.author}
+                subscribe={this.props.subscribe}
+                
+                publishtime={this.props.date}
+                hideOperate={this.props.hideOperate}
+                AuthorBoxStyle={this.props.AuthorBoxStyle}
+              />
+              <TitleBox title={this.props.title}/>
+          </View>
+          </TouchableButton>
           <ImageBox 
             title={this.props.title}
-            img={this.props.images}
+            imgs={this.props.imgs}
             ImageBoxStyle={this.props.ImageBoxStyle}
           />
           <Operation
@@ -54,7 +61,7 @@ shouldComponentUpdate(nextProps, nextState) {
           />
 
         </View>
-      </TouchableButton>
+      
     );
   }
 }

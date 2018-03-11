@@ -26,15 +26,17 @@ import LeftHeader from '../../component/header'
 import SimplePage from './SimplePage'
 import Msg from '../msg/msg'
 import UserList from '../userlist/userlist'
-import Square from '../square/square'
+import SquareAndroid from '../topbar/flights/square.js'
+import Square from '../square/square.js'
 import Mine from '../mine/mine'
 import Test from '../test/test'
+import SquareIOS from '../test/samples/LargeListSample2.js'
 import TopBar from '../topbar/topbar'
 import {TabBottomNavigator} from './tabNavigator'
 
 
 import { getMsgList,sendMsg,receiveMsg } from '../../redux/chat.redux'
-import { loadData } from '../../redux/data.redux';
+
 
 const AnimatedIcon = Animated.createAnimatedComponent(Icon);
 
@@ -54,7 +56,7 @@ const initialLayout = {
 
 @connect(
   state=>state,
-  {getMsgList,receiveMsg,loadData}
+  {getMsgList,receiveMsg}
   )
 export default class TabBarIcon extends React.PureComponent<*, State> {
   
@@ -71,9 +73,7 @@ export default class TabBarIcon extends React.PureComponent<*, State> {
         color: '#F44336',
       },
       { key: '3', title: '广场', icon: 'windows', color: '#3F51B5' },
-     // {key: '4', title: 'test', icon: 'windows', color: '#3F51B5' }
     ],
-    topbarindex:1
   };
 
   componentDidMount() {
@@ -81,7 +81,7 @@ export default class TabBarIcon extends React.PureComponent<*, State> {
       this.props.getMsgList();
       
       this.props.receiveMsg();
-     this.props.loadData()
+    
   }
 
   _handleIndexChange = index =>{
@@ -188,13 +188,14 @@ export default class TabBarIcon extends React.PureComponent<*, State> {
   //   return null;
   // }
     //console.log(route)
+   // const  Square=Platform.OS==='ios'?SquareIOS:SquareAndroid
     switch(route.key){
       case '1':
         return <Msg state={this.state} openControlPanel={this._openControlPanel}/>
       case '2':
         return <UserList state={this.state} openControlPanel={this._openControlPanel}/>
       case '3':
-        return <TopBar state={this.state} handleTopIndexChange={this._handleTopIndexChange} openControlPanel={this._openControlPanel}/>
+        return <Square state={this.state}  handleTopIndexChange={this._handleTopIndexChange} openControlPanel={this._openControlPanel}/> 
     }
   };
 
@@ -231,7 +232,7 @@ export default class TabBarIcon extends React.PureComponent<*, State> {
          tapToClose={true}
          negotiatePan={true}//important!!
           >
-           {/* <TabViewAnimated
+          <TabViewAnimated
               style={this.props.style}
               navigationState={this.state}
               renderScene={this._renderScene}
@@ -241,37 +242,7 @@ export default class TabBarIcon extends React.PureComponent<*, State> {
               swipeEnabled={false}
               initialLayout={initialLayout}
               useNativeDriver
-            />*/}
-
-            <TabNavigator>
-              <TabNavigator.Item
-                selected={this.state.selectedTab === 'msg'}
-                title="消息"
-                renderIcon={() => <Icon name={"weibo"} size={30} style={styles.icon} />}
-                renderSelectedIcon={() => <Icon name={"weibo"} size={30} style={[styles.icon,{color:"#4fccff"}]} />}
-                badgeText="1"
-                onPress={() => this.setState({ selectedTab: 'msg' })}>
-                <Msg  openControlPanel={this._openControlPanel}/>
-              </TabNavigator.Item>
-              <TabNavigator.Item
-                selected={this.state.selectedTab === 'userlist'}
-                title="联系人"
-                renderIcon={() => <Icon name={"user"} size={30} style={styles.icon} />}
-                renderSelectedIcon={() => <Icon name={"user"} size={30} style={[styles.icon,{color:"#4fccff"}]} />}
-                //renderBadge={() => <CustomBadgeView />}
-                onPress={() => this.setState({ selectedTab: 'userlist' })}>
-                <UserList openControlPanel={this._openControlPanel}/>
-              </TabNavigator.Item>
-              <TabNavigator.Item
-                selected={this.state.selectedTab === 'topbar'}
-                title="广场"
-                renderIcon={() => <Icon name={"windows"} size={30} style={styles.icon} />}
-                renderSelectedIcon={() => <Icon name={"windows"} size={30} style={[styles.icon,{color:"#4fccff"}]} />}
-                //renderBadge={() => <CustomBadgeView />}
-                onPress={() => this.setState({ selectedTab: 'topbar' })}>
-                <TopBar  handleTopIndexChange={this._handleTopIndexChange} openControlPanel={this._openControlPanel}/>
-              </TabNavigator.Item>
-            </TabNavigator>
+            />
       </Drawer>  
     );
   }
@@ -290,7 +261,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     backgroundColor: 'transparent',
-    color: '#3a3a3a',
+    color: '#fff',
   },
   label: {
     fontSize: 12,

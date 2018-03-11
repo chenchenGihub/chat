@@ -1,76 +1,207 @@
-import React, { Component } from 'react';
-import { Container, Header, Content, Tab, Tabs } from 'native-base';
-// import Tab1 from './tabOne';
-// import Tab2 from './tabTwo';
-import { View,Text,TextInput } from 'react-native';
+import React, { Component } from "react";
+import { Animated,
+  FlatList,
+  StyleSheet,
+  View, } from "react-native";
 
-class Tab1 extends Component {
+const RNTesterPage = require('./RNTesterPage');
+
+//const infoLog = require('infoLog');
+
+const {
+  FooterComponent,
+  HeaderComponent,
+  ItemComponent,
+  ItemSeparatorComponent,
+  PlainInput,
+  SeparatorComponent,
+  Spindicator,
+  genItemData,
+  getItemLayout,
+  pressItem,
+  renderSmallSwitchOption,
+} = require('./ListExampleShared');
+
+const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
+
+const VIEWABILITY_CONFIG = {
+  minimumViewTime: 3000,
+  viewAreaCoveragePercentThreshold: 100,
+  waitForInteraction: true,
+};
+
+export default class Test extends React.PureComponent<{}, $FlowFixMeState> {
+  static title = '<FlatList>';
+  static description = 'Performant, scrollable list of data.';
+
+  state = {
+    data: genItemData(100),
+    debug: false,
+    horizontal: false,
+    inverted: false,
+    filterText: '',
+    fixedHeight: true,
+    logViewable: false,
+    virtualized: true,
+  };
+
+  _onChangeFilterText = (filterText) => {
+    this.setState({filterText});
+  };
+
+  _onChangeScrollToIndex = (text) => {
+    this._listRef.getNode().scrollToIndex({viewPosition: 0.5, index: Number(text)});
+  };
+
+  _scrollPos = new Animated.Value(0);
+  _scrollSinkX = Animated.event(
+    [{nativeEvent: { contentOffset: { x: this._scrollPos } }}],
+    {useNativeDriver: true},
+  );
+  _scrollSinkY = Animated.event(
+    [{nativeEvent: { contentOffset: { y: this._scrollPos } }}],
+    {useNativeDriver: true},
+  );
+
+  componentDidUpdate() {
+    this._listRef.getNode().recordInteraction(); // e.g. flipping logViewable switch
+  }
+
   render() {
+    const filterRegex = new RegExp(String(this.state.filterText), 'i');
+    const filter = (item) => (
+      filterRegex.test(item.text) || filterRegex.test(item.title)
+    );
+    const filteredData = this.state.data.filter(filter);
     return (
-        <View style={{flex:1,justifyContent: 'center',alignItems: 'center',backgroundColor: "red",}}>
-          <Text>Tab1</Text>
+      <RNTesterPage
+        noSpacer={true}
+        noScroll={true}>
+        <View style={styles.container}>
+          <View style={styles.searchRow}>
+            <View style={styles.options}>
+              <PlainInput
+                onChangeText={this._onChangeFilterText}
+                placeholder="Search..."
+                value={this.state.filterText}
+              />
+              <PlainInput
+                onChangeText={this._onChangeScrollToIndex}
+                placeholder="scrollToIndex..."
+              />
+            </View>
+            <View style={styles.options}>
+              {renderSmallSwitchOption(this, 'virtualized')}
+              {renderSmallSwitchOption(this, 'horizontal')}
+              {renderSmallSwitchOption(this, 'fixedHeight')}
+              {renderSmallSwitchOption(this, 'logViewable')}
+              {renderSmallSwitchOption(this, 'inverted')}
+              {renderSmallSwitchOption(this, 'debug')}
+              <Spindicator value={this._scrollPos} />
+            </View>
+          </View>
+          <SeparatorComponent />
+          <AnimatedFlatList
+            ItemSeparatorComponent={ItemSeparatorComponent}
+            ListHeaderComponent={<HeaderComponent />}
+            ListFooterComponent={FooterComponent}
+            data={filteredData}
+            debug={this.state.debug}
+            disableVirtualization={!this.state.virtualized}
+            getItemLayout={this.state.fixedHeight ?
+              this._getItemLayout :
+              undefined
+            }
+            horizontal={this.state.horizontal}
+            inverted={this.state.inverted}
+            key={(this.state.horizontal ? 'h' : 'v') +
+              (this.state.fixedHeight ? 'f' : 'd')
+            }
+            keyboardShouldPersistTaps="always"
+            keyboardDismissMode="on-drag"
+            legacyImplementation={false}
+            numColumns={1}
+            onEndReached={this._onEndReached}
+            onRefresh={this._onRefresh}
+            onScroll={this.state.horizontal ? this._scrollSinkX : this._scrollSinkY}
+            onViewableItemsChanged={this._onViewableItemsChanged}
+            ref={this._captureRef}
+            refreshing={false}
+            renderItem={this._renderItemComponent}
+            contentContainerStyle={styles.list}
+            viewabilityConfig={VIEWABILITY_CONFIG}
+          />
         </View>
+      </RNTesterPage>
     );
   }
-}
-
-class Tab2 extends Component {
-  render() {
+  _captureRef = (ref) => { this._listRef = ref; };
+  _getItemLayout = (data: any, index: number) => {
+    return getItemLayout(data, index, this.state.horizontal);
+  };
+  _onEndReached = () => {
+    if (this.state.data.length >= 1000) {
+      return;
+    }
+    this.setState((state) => ({
+      data: state.data.concat(genItemData(100, state.data.length)),
+    }));
+  };
+  _onRefresh = () => Alert.alert('onRefresh: nothing to refresh :P');
+  _renderItemComponent = ({item, separators}) => {
     return (
-        <View style={{flex:1,justifyContent: 'center',alignItems: 'center',backgroundColor: "#35ffff",}}>
-          <Text>12321312</Text>
-        </View>
+      <ItemComponent
+        item={item}
+        horizontal={this.state.horizontal}
+        fixedHeight={this.state.fixedHeight}
+        onPress={this._pressItem}
+        onShowUnderlay={separators.highlight}
+        onHideUnderlay={separators.unhighlight}
+      />
     );
-  }
+  };
+  // This is called when items change viewability by scrolling into or out of
+  // the viewable area.
+  _onViewableItemsChanged = (info: {
+      changed: Array<{
+        key: string,
+        isViewable: boolean,
+        item: any,
+        index: ?number,
+        section?: any,
+      }>
+    }
+  ) => {
+    // Impressions can be logged here
+    if (this.state.logViewable) {
+      // infoLog(
+      //   'onViewableItemsChanged: ',
+      //   info.changed.map((v) => ({...v, item: '...'})),
+      // );
+    }
+  };
+  _pressItem = (key: string) => {
+    this._listRef.getNode().recordInteraction();
+    pressItem(this, key);
+  };
+  _listRef: AnimatedFlatList;
 }
 
 
-
-export default class Test extends Component {
-
-  constructor(props) {
-    super(props);
-  
-    this.state = {
-      inform:"@1024",
-      //text:''
-    };
-  }
-
-  // _onChangeText=(v)=>{
-  //   this.setState(preState=>{
-
-  //     console.log(preState.inform)
-
-  //     let opterate=v.length-preState.inform.length
-
-  //     if(opterate<0&&){
-  //       preState.text=''
-  //     }
-  //     return{inform:v}
-  //   })
-  //   // if(this.state.text.indexOf(v)){
-  //   //   this.state.text.splice(this.state.text.indexOf(v))
-  //   // }
-
-  //   console.log(v)
-    
-  // }
-
-  render() {
-    return (
-      <View style={{flex:1,justifyContent: 'center',alignItems: 'flex-start'}}>
-       <View style={{width: 200,height:100,backgroundColor: "#b4b7b7",justifyContent: 'center',}}>
-         <TextInput
-          value={this.state.inform}
-          onChangeText={this._onChangeText}
-          placeholder="....."
-         />
-       </View>
-      </View>
-    );
-  }
-}
-
-
-
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'rgb(239, 239, 244)',
+    flex: 1,
+  },
+  list: {
+    backgroundColor: 'white',
+  },
+  options: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+  },
+  searchRow: {
+    paddingHorizontal: 10,
+  },
+});

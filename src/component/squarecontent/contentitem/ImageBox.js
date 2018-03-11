@@ -8,40 +8,32 @@ import {
   StyleSheet,
   Dimensions
 } from 'react-native';
+import FastImage from 'react-native-fast-image'
 import SimpleLineIcons  from 'react-native-vector-icons/SimpleLineIcons';
 import MaterialCommunityIcons  from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const { width,height } = Dimensions.get('window');
 
-export const Operation =({
-	ImageBoxStyle
+export const ImageBox =({
+	ImageBoxStyle,
+	imgs
 }) => (<View style={ImageBoxStyle}>
-		Image
+		<FastImage
+		    style={styles.image}
+		    source={{
+		      uri: imgs,
+		      //headers:{ Authorization: 'someAuthToken' },
+		      priority: FastImage.priority.normal,
+		    }}
+		    resizeMode={FastImage.resizeMode.cover}
+		  />
 	  </View>)
 
 
 const styles=StyleSheet.create({
-	nameandtime:{
-		marginLeft: 10,
-		alignItems: 'flex-end'
+	image:{
+		flex:1
 	},
-	name:{
-		color:"#9a5917",
-	},
-	publishtime:{
-		fontSize: 15,
-		color:"#d5ded6"
-	},
-	SubscribeStyle:{
-		width:width*0.1,
-		height:width*0.05,
-		borderWidth: 1,
-		borderColor: '#db595d',
-		borderStyle: 'solid',
-		borderRadius: width*0.04,
-		flexDirection: 'row',
-		justifyContent: 'space-around',
-		alignItems: 'center'
-	}
+	
 })
 

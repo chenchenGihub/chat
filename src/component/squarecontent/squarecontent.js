@@ -92,6 +92,7 @@ export default class SquareContent extends React.PureComponent{
 					title={item.title}
 					content={item.body}
 					onPressItem={this.onPressItem}
+					imgs={item.thumbnail}
 					hideOperate={this._hideOperate}
 					subscribe={this._subscribe}
 					AuthorBoxStyle={styles.AuthorBoxStyle}
@@ -130,7 +131,7 @@ export default class SquareContent extends React.PureComponent{
                         refreshing={false}
                         keyExtractor={this._keyExtractor}
                         onEndReachedThreshold={0.1}
-                        initialNumToRender={10}
+                        initialNumToRender={4}
                         onEndReached={
                             this._onload
                         }
@@ -141,7 +142,7 @@ export default class SquareContent extends React.PureComponent{
 
                         getItemLayout={(data,index)=>{
                         	
-                        	return {length: width*0.6, offset: (width*0.6+6) * index, index}
+                        	return {length: height*0.6, offset: (height*0.6+6) * index, index}
                         }}
 
                         />
@@ -155,7 +156,7 @@ export default class SquareContent extends React.PureComponent{
 const styles=StyleSheet.create({
 	contentBox:{
 		width:width,
-		height:width*0.6,
+		height:height*0.6,
 		backgroundColor: "#fff",
 	},
 	AuthorBoxStyle:{
@@ -165,6 +166,7 @@ const styles=StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-around',
+		marginVertical: width*0.04,
 	},
 	OperationStyle:{
 		width:width,
@@ -184,7 +186,7 @@ const styles=StyleSheet.create({
 	},
 	ImageBoxStyle:{
 		flex:1,
-		backgroundColor: "red",
+		backgroundColor: "#368bae",
 	}
 })
 

@@ -3373,6 +3373,10 @@ locate-path@^2.0.0:
     p-locate "^2.0.0"
     path-exists "^3.0.0"
 
+lodash-es@4.17.4:
+  version "4.17.4"
+  resolved "http://registry.npm.taobao.org/lodash-es/download/lodash-es-4.17.4.tgz#dcc1d7552e150a0640073ba9cb31d70f032950e7"
+
 lodash-es@^4.17.5, lodash-es@^4.2.1:
   version "4.17.5"
   resolved "http://registry.npm.taobao.org/lodash-es/download/lodash-es-4.17.5.tgz#9fc6e737b1c4d151d8f9cae2247305d552ce748f"
@@ -4375,6 +4379,12 @@ prop-types@15.5.10:
     fbjs "^0.8.9"
     loose-envify "^1.3.1"
 
+prop-types@15.5.8:
+  version "15.5.8"
+  resolved "http://registry.npm.taobao.org/prop-types/download/prop-types-15.5.8.tgz#6b7b2e141083be38c8595aa51fc55775c7199394"
+  dependencies:
+    fbjs "^0.8.9"
+
 prop-types@15.6.0, prop-types@15.x, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.8, prop-types@^15.6.0:
   version "15.6.0"
   resolved "http://registry.npm.taobao.org/prop-types/download/prop-types-15.6.0.tgz#ceaf083022fc46b4a35f69e13ef75aed0d639856"
@@ -4657,9 +4667,9 @@ react-native-elements@^0.19.0:
     opencollective "^1.0.3"
     prop-types "^15.5.8"
 
-react-native-fast-image@^2.2.6:
-  version "2.2.6"
-  resolved "http://registry.npm.taobao.org/react-native-fast-image/download/react-native-fast-image-2.2.6.tgz#1fd5115f4b15968af6a6f5ac62bab273dd5eb689"
+react-native-fast-image@^3.0.2:
+  version "3.0.2"
+  resolved "http://registry.npm.taobao.org/react-native-fast-image/download/react-native-fast-image-3.0.2.tgz#d30313e277fc0bd2b7a63cd6afa19f3cdb242c94"
   dependencies:
     prop-types "^15.5.10"
 
@@ -4821,6 +4831,12 @@ react-native-scrollable-mixin@^1.0.1:
 react-native-storage@^0.2.2:
   version "0.2.2"
   resolved "http://registry.npm.taobao.org/react-native-storage/download/react-native-storage-0.2.2.tgz#4449197f122b2da0650e3704e1f050260ed58d9f"
+
+react-native-super-grid@^2.0.2:
+  version "2.0.2"
+  resolved "http://registry.npm.taobao.org/react-native-super-grid/download/react-native-super-grid-2.0.2.tgz#bf2a10052782ce149755cb6fa6a00538289193e9"
+  dependencies:
+    prop-types "^15.6.0"
 
 "react-native-svg@https://github.com/expo/react-native-svg/archive/5.5.1-exp.1.tar.gz":
   version "5.5.1"
@@ -5065,6 +5081,14 @@ realpath-native@^1.0.0:
   resolved "http://registry.npm.taobao.org/realpath-native/download/realpath-native-1.0.0.tgz#7885721a83b43bd5327609f0ddecb2482305fdf0"
   dependencies:
     util.promisify "^1.0.0"
+
+recyclerlistview@^1.2.6:
+  version "1.2.6"
+  resolved "http://registry.npm.taobao.org/recyclerlistview/download/recyclerlistview-1.2.6.tgz#fef2c2cb031fbd4bebf87baac0bbe4561b7f3a4b"
+  dependencies:
+    lodash-es "4.17.4"
+    prop-types "15.5.8"
+    ts-object-utils "0.0.5"
 
 redux-thunk@^2.2.0:
   version "2.2.0"
@@ -5999,6 +6023,10 @@ traverse@0.6.6:
 trim-right@^1.0.1:
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/trim-right/download/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
+
+ts-object-utils@0.0.5:
+  version "0.0.5"
+  resolved "http://registry.npm.taobao.org/ts-object-utils/download/ts-object-utils-0.0.5.tgz#95361cdecd7e52167cfc5e634c76345e90a26077"
 
 tsscmp@1.0.5:
   version "1.0.5"
