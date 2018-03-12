@@ -1,5 +1,6 @@
 import { ToastAndroid } from 'react-native';
 import * as Progress from 'react-native-progress';
+import axios from 'axios';
 import sha1 from 'sha1';
 //import { CLOUDINARY } from './constant/constant';
 import { Toast } from 'antd-mobile';
@@ -57,6 +58,9 @@ export const uploadfile=(url)=>{
 
 
 };
+
+
+
 
 
 

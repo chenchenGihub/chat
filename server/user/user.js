@@ -184,13 +184,20 @@ Router.post('/uploadResource',function(req,res){
 		} = req.body;
 			
 //console.log({...req.body})
+	let label=''
+	if(thumbnail){
+		label="video"
+	}
+
+	label="image"
 
 		const dataSource=new DataSource({
 			title:  title,
     		//desc:desc,
     		author:authorId,
     		body:body,
-    		thumbnail:thumbnail
+    		thumbnail:thumbnail,
+    		label:label
 		});	
 
 		//console.log({...req.body})
@@ -200,7 +207,7 @@ Router.post('/uploadResource',function(req,res){
 				return res.json({code:1,msg:"服务器端发生错误,发布失败!"})
 			}
 			const { author,_id } = doc;
-			//console.log(doc)
+			console.log(doc)
 			return res.json({code:0,data:{ author,_id }})
 		})
 
@@ -210,7 +217,7 @@ Router.post('/uploadResource',function(req,res){
 Router.get('/loadDatalist',function(req,res){
 	
 
-	DataSource.find({}).populate('author').exec(function(err,doc){
+	DataSource.find({'label':"image"}).populate('author').exec(function(err,doc){
 		
 		if(err) return res.json({code:1,data:"服务器查询失败"});
 		

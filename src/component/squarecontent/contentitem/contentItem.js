@@ -29,7 +29,10 @@ shouldComponentUpdate(nextProps, nextState) {
   
 
   render() {
-   console.log(this.props)
+   //console.log(this.props)
+   const { imgs } =this.props
+   let Images=Array.isArray(imgs)?imgs:[imgs];
+   console.log(Images)
     const TouchableButton = Platform.OS==='ios'?TouchableWithoutFeedback:TouchableNativeFeedback
     //const textColor = this.props.selected ? "red" : "black";
     return (
@@ -45,13 +48,16 @@ shouldComponentUpdate(nextProps, nextState) {
                 hideOperate={this.props.hideOperate}
                 AuthorBoxStyle={this.props.AuthorBoxStyle}
               />
-              <TitleBox title={this.props.title}/>
+              <TitleBox title={this.props.title} />
           </View>
           </TouchableButton>
           <ImageBox 
             title={this.props.title}
-            imgs={this.props.imgs}
+            imgs={Images}
             ImageBoxStyle={this.props.ImageBoxStyle}
+            onlayout={this.props.onlayout}
+            BoxWidth={this.props.width}
+            BoxHeight={this.props.height}
           />
           <Operation
             repost={this.props.repost}

@@ -15,7 +15,9 @@ import {
 import { Container, Tab, Tabs,ScrollableTab } from 'native-base';
 import shallowequal from 'shallowequal';
 import ImagePicker from 'react-native-image-crop-picker';
-
+import autobind from 'autobind-decorator'
+import sha1 from 'sha1';
+import axios from 'axios';
 import { connect } from 'react-redux';
 import { Header,SearchBar } from 'react-native-elements';
 import Avatar from '../../component/topheader/avatar'
@@ -23,7 +25,7 @@ import Title from '../../component/topheader/title'
 import RightComponent from '../../component/header/rightcomponent'
 
 import { uploadFormData } from "../../utils/httpUtils.js"
-import Constants from "../../constant/constant.js"
+import { CLOUDINARY } from "../../constant/constant.js"
 import Panel from "../../component/panel/panel"
 import MyCamera from "../../component/panel/camera"
 import VideoRoll from "../../component/panel/videoRoll"
@@ -78,13 +80,57 @@ shouldComponentUpdate(nextProps, nextState) {
       index,
     });
   }
-
-_publishVideo=(v)=>{
+@autobind
+_publishVideo(v){
   console.log(v)
   this.operate('');  
   this._upload(uploadFormData(v.videoUri,"video"),v);
 
 } 
+
+@autobind
+_publish(title,files){
+  this.operate('picOrtext');
+
+
+  const uploaders = files.map(file => {
+    // Initial FormData
+    let timestamp = Date.now();
+        let tags = 'app,image';
+        let folder = 'image';
+
+        let signature=`folder=${folder}&tags=${tags}&timestamp=${timestamp+CLOUDINARY.api_secret}`;
+        signature=sha1(signature);
+
+        const body = new FormData();
+
+        body.append('file', {uri: file, type: 'image/png', name: 'testImage.png'})
+        body.append('folder',folder);
+        body.append('signature',signature);
+        body.append('tags',tags);
+        body.append('timestamp',timestamp);
+        body.append('api_key',CLOUDINARY.api_key);
+        body.append('resource_type','image');
+       
+    // Make an AJAX upload request using Axios (replace Cloudinary URL below with your own)
+    return axios.post(CLOUDINARY.image, body).then(response => {
+      const data = response.data;
+      console.log(data)
+      const fileURL = data.secure_url // You should store this URL for future references in your app
+      return fileURL
+    })
+
+  });
+
+axios.all(uploaders).then((res) => {
+
+    console.log(res)
+    this.props.publish({title:title,body:res})
+  });
+
+}
+
+
 
 
 _upload(body,v){
@@ -174,7 +220,7 @@ operate(v){
 
 renderPanelContainer=()=>{
   if(this.state.choice=='picOrtext'){
-    return (<Panel operate={this.operate}/>)
+    return (<Panel operate={this.operate} publish={this._publish}/>)
   }else if(this.state.choice=='capatureVideo'){
     return (<MyCamera 
         operate={this.operate}

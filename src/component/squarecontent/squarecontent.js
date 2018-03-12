@@ -34,6 +34,9 @@ export default class SquareContent extends React.PureComponent{
 	  this.state = {
 	  	refreshing:false
 	  };
+
+	  this.width;
+	  this.height;
 	}
 
 
@@ -79,27 +82,52 @@ export default class SquareContent extends React.PureComponent{
     _vote(){
     	console.log("_vote")
     }
+    @autobind
+    _onlayout(e){
+    	console.log(e.nativeEvent.layout)
+    	this.setHeight(e.nativeEvent.layout.height)
+    	this.setWidth(e.nativeEvent.layout.width)
+    }
 
+    setHeight(height){
+    	this.height=height;
+    }
+
+    getHeight(){
+    	return this.height
+    }
+
+
+    setWidth(width){
+    	this.width=width
+    }
+
+    getWidth(){
+    	return this.width
+    }
 
 	_renderItemData=({item})=>{
-		//console.log(item)
+		
 		return (
 					<ContentItem
-					contentItemstyle={styles.contentBox}
-					id={item._id}
-					author={item.author}
-					date={item.date}
-					title={item.title}
-					content={item.body}
-					onPressItem={this.onPressItem}
-					imgs={item.thumbnail}
-					hideOperate={this._hideOperate}
-					subscribe={this._subscribe}
-					AuthorBoxStyle={styles.AuthorBoxStyle}
-					OperationStyle={styles.OperationStyle}
-					sendcomment={this._sendcomment}
-					vote={this._vote}
-					ImageBoxStyle={styles.ImageBoxStyle}
+						contentItemstyle={styles.contentBox}
+						id={item._id}
+						author={item.author}
+						date={item.date}
+						title={item.title}
+						content={item.body}
+						onPressItem={this.onPressItem}
+						imgs={item.thumbnail||item.body}
+						hideOperate={this._hideOperate}
+						subscribe={this._subscribe}
+						AuthorBoxStyle={styles.AuthorBoxStyle}
+						OperationStyle={styles.OperationStyle}
+						sendcomment={this._sendcomment}
+						vote={this._vote}
+						ImageBoxStyle={styles.ImageBoxStyle}
+						onlayout={this._onlayout}
+						width={this.getWidth()}
+						height={this.getHeight()}
 				/>
 				)
 	}
@@ -186,7 +214,10 @@ const styles=StyleSheet.create({
 	},
 	ImageBoxStyle:{
 		flex:1,
-		backgroundColor: "#368bae",
+		flexDirection: 'row',
+		backgroundColor: '#fff',
+		flexWrap: 'wrap',
+
 	}
 })
 

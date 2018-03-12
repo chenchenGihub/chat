@@ -21,9 +21,9 @@ const CLOUDINARY = {
   api_secret: 'HZHGi5k2hTRpr40Bex9E6NMJKVU', 
   image:'https://api.cloudinary.com/v1_1/dqfktbdqw/image/upload',
   video:'https://api.cloudinary.com/v1_1/dqfktbdqw/video/upload',
-  audio:'https://api.cloudinary.com/v1_1/dqfktbdqw/raw/upload',
-};
-export default {
+  audio:'https://api.cloudinary.com/v1_1/dqfktbdqw/audio/upload',
+}
+export  {
 	emoji,
 	CLOUDINARY
 };

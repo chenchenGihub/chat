@@ -18,7 +18,6 @@ import {
   Image,
   Modal
 } from 'react-native';
-import sha1 from 'sha1';
 import FontAwesome from  'react-native-vector-icons/FontAwesome';
 import Entypo from  'react-native-vector-icons/Entypo';
 import Ionicons from  'react-native-vector-icons/Ionicons';
@@ -27,6 +26,7 @@ import { ActionSheet } from 'antd-mobile';
 import ImagePicker from 'react-native-image-picker';
 
 import ImageGallary from './imageGallary';
+import { uploadMutilfiles } from '../../utils/httpUtils.js';
 
 const { width,height } = Dimensions.get('window');
 
@@ -40,7 +40,7 @@ const options = {
     cancelButtonTitle:'取消',
     takePhotoButtonTitle:'拍照',
     chooseFromLibraryButtonTitle:'相册选取',
-    quality:0.7,
+    quality:0.5,
     allowsEditing:true,
     maxWidth:600,
     maxHeight:600,
@@ -57,14 +57,7 @@ const options = {
     }
   };
 
-const CLOUDINARY = {
-  cloud_name: 'dqfktbdqw',  
-  api_key: '982239126941818',  
-  api_secret: 'HZHGi5k2hTRpr40Bex9E6NMJKVU', 
-  image:'https://api.cloudinary.com/v1_1/dqfktbdqw/image/upload',
-  video:'https://api.cloudinary.com/v1_1/dqfktbdqw/video/upload',
-  audio:'https://api.cloudinary.com/v1_1/dqfktbdqw/audio/upload',
-}
+
 
 export default class Panel extends React.Component{
 
@@ -87,9 +80,6 @@ constructor(props) {
 	 
 
 
-// shouldComponentUpdate(nextProps, nextState) {
-  
-// }
 
 
 
@@ -156,9 +146,6 @@ showActionSheet = () => {
     ActionSheet.showActionSheetWithOptions({
       options: BUTTONS,
       cancelButtonIndex: BUTTONS.length - 1,
-      //destructiveButtonIndex: BUTTONS.length - 2,
-      // title: 'title',
-     // message: 'I am description, description, description',
       maskClosable: true,
       'data-seed': 'logId',
       
@@ -211,68 +198,9 @@ previewPic=(v)=>{
   })
 }
 
-onButtonPress=(files)=>{
 
 
-         /**
-           * 上传图片到服务器
-           */
-            
-        console.log("arr",files[0])
 
-        let timestamp = Date.now();
-        let tags = 'app,avatar';
-        let folder = 'avatar';
-
-        let signature=`folder=${folder}&tags=${tags}&timestamp=${timestamp+CLOUDINARY.api_secret}`;
-        signature=sha1(signature);
-
-        let file=files[0];
-
-        const body = new FormData();
-        body.append('file', {uri: file, type: 'image/png', name: 'testImage.png'});
-        body.append('folder',folder);
-        body.append('signature',signature);
-        body.append('tags',tags);
-        body.append('timestamp',timestamp);
-        body.append('api_key',CLOUDINARY.api_key);
-        body.append('resource_type','image');
-        //body.append('file',file[0]); 
-
-        this._upload(body);
-        //this.fetch(body);
-}
-
-fetch=(body)=>{
-    console.log(body);
-}
-
-
-_upload=(body)=>{
-  const xhr = new XMLHttpRequest();
-
-        let url = CLOUDINARY.image;
-
-        xhr.open("POST",url);
-
-        xhr.onload = () => {
-          if (xhr.status === 200) {
-            
-            let response=JSON.parse(xhr.responseText);
-            console.log("response",response)
-            
-           // response.secure_url && Toast.success('头像上传成功!!!', 1);
-
-
-          } else {
-            console.warn('error');
-          }
-        }
-        xhr.upload.onprogress=(event)=>{
-          //console.log(event)
-        }
-      xhr.send(body);
-}
 
 	render(){
 		const locations=!this.state.location?"无法获取地址？":this.state.location;
@@ -295,7 +223,7 @@ _upload=(body)=>{
 		            
   		            <View style={styles.cancel}>
   		            	<Button
-  				          onPress={()=>this.onButtonPress(this.state.current)}
+  				          onPress={()=>this.props.publish(this.state.text,this.state.current)}
   				          title="发表"
   				          accessibilityLabel="See an informative alert"
   				          disabled={!this.state.text&&this.state.current.length==0}
@@ -338,7 +266,7 @@ _upload=(body)=>{
                     }
                         
                     {
-                      this.state.current.length>=3?null:
+                      this.state.current.length>=6?null:
         				      (<TouchableOpacity onPress={this.showActionSheet} style={{width:width*0.3}}>
           				      <View style={styles.cameraContainer}>
           				      	<Entypo name={"camera"} size={40} color={"#777d82"}/>

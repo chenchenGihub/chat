@@ -20,10 +20,12 @@ export const TitleBox =({
 	title
 }) =>{
 	if(title){
-		return(<Text style={styles.TitleBoxStyle}>
-			{title.length>40?`${title.substring(0,5)}${'...'}`:title}
-			{title.length>40?(<Alltext/>):null}
-		  </Text>)
+		return(
+				<View style={styles.BoxStyle}>
+					<Text style={styles.TitleBoxStyle}>{title.length>40?`${title.substring(0,40)}${'...'}`:title}
+					{title.length>40?(<Alltext/>):null}</Text>
+				</View>
+			)
 	}
 
 	return null
@@ -35,13 +37,17 @@ const styles=StyleSheet.create({
 		color:"#255f79"
 	},
 	TitleBoxStyle:{
-		//flex:0.8,
-		padding: width*0.02,
+		
 		fontSize: width*0.04,
 		justifyContent: 'center',
 		alignItems: 'center',
 		fontWeight: 'bold',
-		color:"#3c3b3b"
+		color:"#3c3b3b",
+		
+	},
+	BoxStyle:{
+		marginBottom: 10,
 	}
+
 })
 
