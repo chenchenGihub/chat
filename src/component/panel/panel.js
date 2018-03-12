@@ -183,6 +183,7 @@ showActionSheet = () => {
 
 publishPic(arr){
 
+if(!arr) arr=[];
  const current = arr.map(v=>v.uri)
 
  console.log(current)

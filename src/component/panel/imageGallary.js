@@ -3,12 +3,12 @@
 
 import React from 'react';
 import {
-	View, 
-	Text, 
-	StyleSheet,
-	Dimensions,
-	TouchableOpacity,
-	Platform,
+  View, 
+  Text, 
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+  Platform,
   CameraRoll
 } from 'react-native';
 import { connect } from 'react-redux';
@@ -17,7 +17,7 @@ import Modal from "react-native-modal";
 
 import axios from 'axios';
 import Video from 'react-native-video';
-import Popover, { PopoverTouchable } from 'react-native-modal-popover';
+
 import CameraRollPicker from 'react-native-camera-roll-picker';
 import GallaryList from './gallarylist/gallarylist';
 import { saveDatas } from '../../redux/saveimage.redux';
@@ -29,7 +29,7 @@ const { width,height } = Dimensions.get('window');
   {saveDatas}
   )
 export default class ImageGallary extends React.Component{
-	
+  
 
  state = {
     isModalVisible: this.props.visibleModal,
@@ -92,12 +92,14 @@ getSelectedImages(current) {
           swipeThreshold={width*0.6}
           style={[styles.bottomModal,{ marginTop: Platform.OS==='ios' ? height*0.018 :0}]}
         >
+
+        
           <View style={styles.modalContent}>
                    <View style={styles.modalHeader}>
                      <EvilIcons name="close" size={20} color="#242425" onPress={()=>{this.props.closePic()}}/>
-                     <View style={styles.pictext}>
-                       <Text>最近{counts}张图片</Text>
-                     </View>
+                    
+                       <Text style={styles.pictext}>最近{counts}张图片</Text>
+                     
                      
                       
                       
@@ -148,7 +150,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width:width,
-    height:width*0.1
+    height:width*0.1,
+    paddingLeft: width*0.04,
   },
   choosePanel:{
     flex:1,
@@ -177,6 +180,10 @@ const styles = StyleSheet.create({
     height:width*0.08,
     flexDirection: 'row',
     alignItems: 'center'
+  },
+  pictext:{
+   alignSelf: 'center',
+   marginLeft: width*0.08,
   }
 });
 

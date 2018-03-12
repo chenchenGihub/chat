@@ -1,11 +1,11 @@
 import React from 'react';
 import {
-	View, 
-	Text, 
-	StyleSheet,
-	Dimensions,
-	TouchableOpacity,
-	Platform,
+  View, 
+  Text, 
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+  Platform,
   FlatList,
   ToastAndroid,
   AlertIOS
@@ -21,7 +21,7 @@ const { width,height } = Dimensions.get('window');
 
 
 export default class GallaryList extends React.Component{
-	
+  
 
  state = {
     selected: (new Map(): Map<object, boolean>),
@@ -29,15 +29,6 @@ export default class GallaryList extends React.Component{
   };
 
  
-
- componentDidUpdate(prevProps, prevState) {
-
-
-
-  //console.log(nums)
-
-   
- }
 
  componentWillUnmount() {
    this.props.showtotal(0)
@@ -56,17 +47,11 @@ export default class GallaryList extends React.Component{
 
   _onPressItem = (id: object) => {
 
-  //   let map= this.state.selected.entries();
-  // let nums=[]; 
-  //  for (let [key, value] of map) {
-  //   if(value){
-  //     nums.push(key)
-  //   }
-  // }
+  
 
    
-    if(this.state.nums.length>=3&&!this.state.selected.get(id)){
-      ToastMessage(Platform.OS,"已超过三张",300)
+    if(this.state.nums.length>=6&&!this.state.selected.get(id)){
+      ToastMessage(Platform.OS,"已超过六张",300)
       return
     }
   
@@ -132,7 +117,7 @@ export default class GallaryList extends React.Component{
 const styles = StyleSheet.create({
   
   container:{
-  	flex:1
+    flex:1
   },
   headerBox:{
     height:width*0.1,
