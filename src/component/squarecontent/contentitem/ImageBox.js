@@ -13,6 +13,8 @@ import SimpleLineIcons  from 'react-native-vector-icons/SimpleLineIcons';
 import MaterialCommunityIcons  from 'react-native-vector-icons/MaterialCommunityIcons';
 import GridView from 'react-native-super-grid';
 
+
+
 const { width,height } = Dimensions.get('window');
 
 
@@ -22,7 +24,8 @@ export const ImageBox =({
 	imgs,
 	onlayout,
 	BoxWidth,
-	BoxHeight
+	BoxHeight,
+	type
 }) => (
 			<View style={ImageBoxStyle} onLayout={onlayout}>
 			{
@@ -37,7 +40,7 @@ export const ImageBox =({
 						   }}
 						   resizeMode={FastImage.resizeMode.cover}
 				  		/>
-				
+					
 					</View>
 						
 					)
@@ -52,7 +55,6 @@ const styles=StyleSheet.create({
 	image:{
 		flex:1,
 		margin: width*0.006,
-	},
-	
+	}
 })
 

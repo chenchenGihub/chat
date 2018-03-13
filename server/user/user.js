@@ -217,7 +217,7 @@ Router.post('/uploadResource',function(req,res){
 Router.get('/loadDatalist',function(req,res){
 	
 
-	DataSource.find({'label':"image"}).populate('author').exec(function(err,doc){
+	DataSource.find({}).populate('author').exec(function(err,doc){
 		
 		if(err) return res.json({code:1,data:"服务器查询失败"});
 		

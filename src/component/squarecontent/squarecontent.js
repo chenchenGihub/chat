@@ -87,6 +87,11 @@ export default class SquareContent extends React.PureComponent{
     	console.log(e.nativeEvent.layout)
     	this.setHeight(e.nativeEvent.layout.height)
     	this.setWidth(e.nativeEvent.layout.width)
+    } 
+   
+    _goToDetail(item){
+    	console.log(item)
+    	
     }
 
     setHeight(height){
@@ -128,6 +133,8 @@ export default class SquareContent extends React.PureComponent{
 						onlayout={this._onlayout}
 						width={this.getWidth()}
 						height={this.getHeight()}
+						playiconstyle={styles.VideoIconBox}
+						goToDetail={this._goToDetail.bind(this,item)}
 				/>
 				)
 	}
@@ -158,8 +165,8 @@ export default class SquareContent extends React.PureComponent{
                         onRefresh={this.refreshing}
                         refreshing={false}
                         keyExtractor={this._keyExtractor}
-                        onEndReachedThreshold={0.1}
-                        initialNumToRender={4}
+                        onEndReachedThreshold={0.01}
+                        initialNumToRender={1}
                         onEndReached={
                             this._onload
                         }
@@ -218,6 +225,22 @@ const styles=StyleSheet.create({
 		backgroundColor: '#fff',
 		flexWrap: 'wrap',
 
+	},
+	VideoIconBox:{
+		position: 'absolute',
+		width:width*0.15,
+		height:width*0.15,
+		borderWidth: 1,
+		borderColor: '#e4e4e2',
+		borderStyle: 'solid',
+		borderRadius: width,
+		top:width*0.5,
+		left:width*0.4,
+		right:width*0.4,
+		bottom:width*0.5,
+		backgroundColor: 'rgba(0,0 ,0,0.3 )',
+		alignItems: 'center',
+		justifyContent: 'center',
 	}
 })
 

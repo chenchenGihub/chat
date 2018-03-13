@@ -46,6 +46,7 @@ const styles=StyleSheet.create({
 		
 	},
 	BoxStyle:{
+		marginLeft: 10,
 		marginBottom: 10,
 	}
 

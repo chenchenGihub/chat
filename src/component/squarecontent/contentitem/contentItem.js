@@ -4,6 +4,7 @@ import {
   Text ,
   TouchableWithoutFeedback,
   TouchableNativeFeedback,
+  TouchableOpacity,
   Platform,
 } from 'react-native';
 import shallowequal from 'shallowequal';
@@ -13,7 +14,7 @@ import  { AuthorBox } from './AuthorBox';
 import  { Operation } from './Operation';
 import  { ImageBox } from './ImageBox';
 import  { TitleBox } from './TitleBox';
-
+import { VideoIcon } from '../SquareItemdetail/VideoIcon.js';
 
 export default class ContentItem extends React.Component {
   _onPress = () => {
@@ -22,7 +23,7 @@ export default class ContentItem extends React.Component {
 
 
 shouldComponentUpdate(nextProps, nextState) {
- return !shallowequal(this.props, nextProps)||!shallowequal(this.state,nextState);
+ return !shallowequal(this.props.content, nextProps.content)||!shallowequal(this.state,nextState);
 }
 
 
@@ -31,9 +32,10 @@ shouldComponentUpdate(nextProps, nextState) {
   render() {
    //console.log(this.props)
    const { imgs } =this.props
+   
    let Images=Array.isArray(imgs)?imgs:[imgs];
-   console.log(Images)
-    const TouchableButton = Platform.OS==='ios'?TouchableWithoutFeedback:TouchableNativeFeedback
+   
+    const TouchableButton = Platform.OS==='ios'?TouchableOpacity:TouchableNativeFeedback
     //const textColor = this.props.selected ? "red" : "black";
     return (
       
@@ -51,7 +53,8 @@ shouldComponentUpdate(nextProps, nextState) {
               <TitleBox title={this.props.title} />
           </View>
           </TouchableButton>
-          <ImageBox 
+          <TouchableOpacity onPress={this.props.goToDetail}>
+            <ImageBox 
             title={this.props.title}
             imgs={Images}
             ImageBoxStyle={this.props.ImageBoxStyle}
@@ -59,13 +62,15 @@ shouldComponentUpdate(nextProps, nextState) {
             BoxWidth={this.props.width}
             BoxHeight={this.props.height}
           />
+          </TouchableOpacity>  
           <Operation
             repost={this.props.repost}
             sendcomment={this.props.sendcomment}
             vote={this.props.vote}
             OperationStyle={this.props.OperationStyle}
           />
-
+          
+          {!Array.isArray(imgs)?<VideoIcon VideoIconBox={this.props.playiconstyle}/>:null}
         </View>
       
     );

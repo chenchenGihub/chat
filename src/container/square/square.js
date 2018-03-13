@@ -131,6 +131,10 @@ axios.all(uploaders).then((res) => {
 }
 
 
+@autobind
+_goToDetail(v){
+  
+}
 
 
 _upload(body,v){
@@ -274,6 +278,7 @@ renderPanelContainer=()=>{
                 platform={Platform.OS}
                 data={this.props.datalist}
                 numberOfSections={1}
+                goToDetail={this._goToDetail}
               />
       </View>
     );
