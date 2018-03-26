@@ -103,13 +103,9 @@ const models={
 				type: mongoose.Schema.Types.ObjectId, ref: 'User',require:true
 			},
 			content:{type:mongoose.Schema.Types.Mixed,require:true},
-			votes:[{type:mongoose.Schema.Types.ObjectId, ref: 'User',require:true}],
+			votes:[{type:mongoose.Schema.Types.ObjectId, ref: 'User'}],
 			date: { type: Date, default: Date.now },
-			childrenComments:[{type:mongoose.Schema.Types.ObjectId,require:true}],
-			meta: {
-      			votes: Number,
-      			comments:Number
-    		}
+			childrenComments:[{type:mongoose.Schema.Types.ObjectId}],
 		},
 		childrenComments:{
 			parentCommentId:{type:mongoose.Schema.Types.ObjectId,require:true},

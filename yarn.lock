@@ -4796,6 +4796,13 @@ react-native-modal@^5.0.1:
     prop-types "15.6.0"
     react-native-animatable "^1.2.4"
 
+react-native-modalbox@^1.4.2:
+  version "1.4.2"
+  resolved "http://registry.npm.taobao.org/react-native-modalbox/download/react-native-modalbox-1.4.2.tgz#818c9354c9b13327ec807c6436e8516b3b419478"
+  dependencies:
+    create-react-class "^15.6.0"
+    prop-types "^15.5.10"
+
 react-native-optimized-flatlist@^1.0.4:
   version "1.0.4"
   resolved "http://registry.npm.taobao.org/react-native-optimized-flatlist/download/react-native-optimized-flatlist-1.0.4.tgz#15c817ffb545e3c62e56a1b3c4654c1316414941"
@@ -4817,6 +4824,12 @@ react-native-progress@^3.4.0:
 react-native-pull-refresh@^1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/react-native-pull-refresh/download/react-native-pull-refresh-1.0.0.tgz#890968a002466050c621a628bd095e03bbb6887a"
+
+react-native-recyclerview-list@^0.2.3:
+  version "0.2.3"
+  resolved "http://registry.npm.taobao.org/react-native-recyclerview-list/download/react-native-recyclerview-list-0.2.3.tgz#93cffe348e7e78b578a7d9d6940105c07c2953c5"
+  dependencies:
+    prop-types "^15.6.0"
 
 react-native-safe-module@^1.1.0:
   version "1.2.0"

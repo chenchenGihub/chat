@@ -14,11 +14,10 @@ import BossInfo from '../container/bossInfo/bossinfo.js'
 import TabBarIcon from '../container/tabbar/tabbar.js'
 import UserDetail from '../container/userdetail/userdetail.js'
 import ChatTo from '../container/chatto/chatto.js'
+import UserMainPage from '../container/usermainpage/UserMainPage.js'
 import { updateUserInfo,logout } from '../redux/user.redux.js'
 import { port } from '../utils/dev'
 
-
-//global.socket=socket;
 
 export const RootNavigator = StackNavigator({
   Auth:{
@@ -44,6 +43,9 @@ export const RootNavigator = StackNavigator({
   },
   ChatTo:{
     screen:ChatTo
+  },
+  UserMainPage:{
+    screen:UserMainPage
   }
 },
 {

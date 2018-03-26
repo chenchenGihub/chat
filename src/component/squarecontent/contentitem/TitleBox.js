@@ -17,11 +17,12 @@ const { width,height } = Dimensions.get('window');
 const Alltext=()=>(<Text style={{color:"#255f79"}}>全文</Text>)
 
 export const TitleBox =({
-	title
+	title,
+	BoxStyle
 }) =>{
 	if(title){
 		return(
-				<View style={styles.BoxStyle}>
+				<View style={BoxStyle}>
 					<Text style={styles.TitleBoxStyle}>{title.length>40?`${title.substring(0,40)}${'...'}`:title}
 					{title.length>40?(<Alltext/>):null}</Text>
 				</View>
@@ -44,9 +45,6 @@ const styles=StyleSheet.create({
 		fontWeight: 'bold',
 		color:"#3c3b3b",
 		
-	},
-	BoxStyle:{
-		marginBottom: 10,
 	}
 
 })

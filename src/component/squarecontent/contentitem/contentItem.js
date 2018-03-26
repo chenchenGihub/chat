@@ -16,46 +16,54 @@ import  { TitleBox } from './TitleBox';
 
 
 export default class ContentItem extends React.Component {
-  _onPress = () => {
-    this.props.onPressItem(this.props.id);
-  };
+  
 
 
 shouldComponentUpdate(nextProps, nextState) {
- return !shallowequal(this.props, nextProps)||!shallowequal(this.state,nextState);
+ return !shallowequal(this.props.item, nextProps.item)||!shallowequal(this.state,nextState);
 }
 
-
+componentWillUnmount() {
+  console.log("ContentItem Unmount")
+}
   
 
   render() {
-   //console.log(this.props)
+   
    const { imgs } =this.props
    let Images=Array.isArray(imgs)?imgs:[imgs];
-   console.log(Images)
+   console.log(this.props.item)
     const TouchableButton = Platform.OS==='ios'?TouchableWithoutFeedback:TouchableNativeFeedback
-    //const textColor = this.props.selected ? "red" : "black";
+   
     return (
-      
-        <View style={this.props.contentItemstyle}>
-          <TouchableButton onPress={this._onPress} >
-          <View>
+      <TouchableButton onPress={()=>this.props.goToUserMainPage(this.props.item)} >
+        <View style={this.props.contentItemstyle}
+              pointerEvents={"box-none"}
+        >
+          
+          
+            
+          
               <AuthorBox 
+                onPress={this._onPress}
                 author={this.props.author}
                 subscribe={this.props.subscribe}
-                
+                goToUserDetail={this.props.goToUserDetail}
                 publishtime={this.props.date}
                 hideOperate={this.props.hideOperate}
                 AuthorBoxStyle={this.props.AuthorBoxStyle}
               />
-              <TitleBox title={this.props.title} />
-          </View>
-          </TouchableButton>
+
+         
+          
+              <TitleBox title={this.props.title} BoxStyle={this.props.BoxStyle}/>
+               
+        
+          
           <ImageBox 
-            title={this.props.title}
             imgs={Images}
             ImageBoxStyle={this.props.ImageBoxStyle}
-            onlayout={this.props.onlayout}
+            //onlayout={this.props.onlayout}
             BoxWidth={this.props.width}
             BoxHeight={this.props.height}
           />
@@ -67,7 +75,7 @@ shouldComponentUpdate(nextProps, nextState) {
           />
 
         </View>
-      
+       </TouchableButton>
     );
   }
 }

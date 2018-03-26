@@ -20,28 +20,34 @@ const { width,height } = Dimensions.get('window');
 export const ImageBox =({
 	ImageBoxStyle,
 	imgs,
-	onlayout,
 	BoxWidth,
 	BoxHeight
 }) => (
-			<View style={ImageBoxStyle} onLayout={onlayout}>
-			{
-				imgs.map((item,i)=>
-					<View key={i} style={{width:BoxWidth/(imgs.length>4?3:((imgs.length>1&&imgs.length<=4)?2:1)),height: BoxHeight/(imgs.length>=3?2:1)}}>
-						<FastImage
-					  	 style={styles.image}
-					  	 source={{
-						    uri: item,
-						     // headers:{ Authorization: 'someAuthToken' },
-						     priority: FastImage.priority.normal,
-						   }}
-						   resizeMode={FastImage.resizeMode.cover}
-				  		/>
-				
-					</View>
+			<View style={ImageBoxStyle} >
+			
+					{
+						imgs.map((v,i)=>
+							<View
+								key={i}
+								style={{width:imgs.length>4?BoxWidth/3:((imgs.length>1&&imgs.length<5)?BoxWidth/2:BoxWidth),height:imgs.length>1?BoxHeight/2:BoxHeight}}
+							>
+								<FastImage
+						  	 style={styles.image}
+						  	 source={{
+							    uri: v,
+							     // headers:{ Authorization: 'someAuthToken' },
+							     priority: FastImage.priority.normal,
+							   }}
+							   resizeMode={FastImage.resizeMode.cover}
+					  		/>
+							</View>
+				  		)
+					}
 						
-					)
-			}
+				
+					
+						
+			
 				  
 			</View>
 		

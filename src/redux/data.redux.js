@@ -1,20 +1,29 @@
 import axios from 'axios';
 import { port } from '../utils/dev.js';
 
-const RESOURCE_DATA_LIST='RESOURCE_DATA_LIST';
+const DID_RESOURCE_DATA_LIST='DID_RESOURCE_DATA_LIST';
 const FETCH_NEW_DATA='FETCH_NEW_DATA';
 const LOAD_EARLIER_DATA='LOAD_EARLIER_DATA';
+const WILL_RESOURCE_DATA_LIST='WILL_RESOURCE_DATA_LIST';
 
 
 const initState={
 	data:[],
-	numColumns:1
+	numColumns:1,
+	refreshing:false,
+	loading:false
 }
 
 
 function getdataList(data){
 	return{
-		type:RESOURCE_DATA_LIST,
+		type:DID_RESOURCE_DATA_LIST,
+		payload:data
+	}
+}
+function willgetdataList(data){
+	return{
+		type:WILL_RESOURCE_DATA_LIST,
 		payload:data
 	}
 }
@@ -22,8 +31,10 @@ function getdataList(data){
 export function datalist(state=initState,action){
 	
 	switch(action.type){
-		case RESOURCE_DATA_LIST:
-			return {...state,data:action.payload}
+		case WILL_RESOURCE_DATA_LIST:
+			return {...state,refreshing:action.payload}
+		case DID_RESOURCE_DATA_LIST:
+			return {...state,refreshing:false,data:action.payload}
 		case LOAD_EARLIER_DATA:
 			return {...state,data:[...state.data,...action.payload]}
 		case FETCH_NEW_DATA:
@@ -34,13 +45,21 @@ export function datalist(state=initState,action){
 }
 
 export function loadData(){
+	
+
+	console.log("loadData")
 	return dispatch=>{
+
+		//dispatch(willgetdataList(true))
+
 		axios.get(`${port}/user/loadDatalist`)
 		.then(res=>{
 			if(res.status==200&&res.data.code===0){
 
-				//console.log(res.data.data)
-				dispatch(getdataList(res.data.data))
+				setTimeout(()=>{
+					dispatch(getdataList(res.data.data))
+				},3000)
+
 			}
 			
 		})

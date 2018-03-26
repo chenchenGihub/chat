@@ -217,13 +217,68 @@ Router.post('/uploadResource',function(req,res){
 Router.get('/loadDatalist',function(req,res){
 	
 
-	DataSource.find({'label':"image"}).populate('author').exec(function(err,doc){
+	DataSource.find({},'-comments')
+			  .populate('author')
+			  .exec(function(err,doc){
 		
 		if(err) return res.json({code:1,data:"服务器查询失败"});
 		
 		return res.json({code:0,data:doc})
 		
 	})
+	
+})
+
+Router.post('/fetchcomments',function(req,res){
+	
+	const { dataId } = req.body;
+
+	ParentComments.find({dataId:dataId})
+				  .populate('commentor',"nickname avatarurl")
+			  	  .exec(function(err,doc){
+		
+		if(err) return res.json({code:1,data:"服务器查询失败"});
+		console.log("doc",doc);
+		return res.json({code:0,data:doc})
+		
+	})
+	
+})
+
+
+Router.post('/sendcomment',function(req,res){
+	
+	const { text,dataId,commentId } = req.body;
+
+	console.log(text,dataId,commentId)
+
+
+	let parentComments=new ParentComments({
+		dataId:dataId,
+		commentor:commentId,
+		content:text
+	})
+
+	parentComments.save(function(err,doc){
+		if(err){
+				return res.json({code:1,msg:"服务器端发生错误,提交评论失败!"})
+			}
+		const { _id } = doc;
+		console.log(doc);
+		ParentComments.findById(_id)
+					  .populate("User","nickname avatarurl")
+					  .exec(function(err,doc){
+					  	if(err){
+					  		return res.json({code:1,msg:"服务器发生错误,返回评论失败"})
+					  	}
+					  	console.log("查询结果",doc)
+					  	return res.json({code:0,data:doc})
+					  })
+
+	})
+
+
+
 	
 })
 

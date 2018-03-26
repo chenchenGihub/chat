@@ -19,6 +19,9 @@ const REGISTER='REGISTER';
 const USERDETAIL='USERDETAIL';
 const CHATTO='CHATTO';
 const GOBACK='GOBACK';
+const USERMAINPAGE='USERMAINPAGE';
+const FUSH_COMMENTS_SUCCESS='FUSH_COMMENTS_SUCCESS';
+const FETCH_MORE_COMMENTS='FETCH_MORE_COMMENTS';
 
 
 /**
@@ -111,12 +114,17 @@ export function nav(state=initialNavState,action){
 			 	)
 			 break;
 		case "CHATTO":
-		//console.log(action.data)
 			 	nextState=RootNavigator.router.getStateForAction(
 			 	NavigationActions.navigate({"routeName":"ChatTo","params": {v:action.data},}),
 			 	state
 			 	)
 			 	break;
+		case "USERMAINPAGE":
+			 	nextState=RootNavigator.router.getStateForAction(
+			 	NavigationActions.navigate({"routeName":"UserMainPage","params": {v:action.data},}),
+			 	state
+			 	)
+			 	break;	 	
 		case "GOBACK":
 				nextState=RootNavigator.router.getStateForAction(
 			 	NavigationActions.back(),
@@ -128,6 +136,23 @@ export function nav(state=initialNavState,action){
 	}
 
 	return nextState || state
+}
+
+const initialComments={
+	comment:[],
+	page:0,
+	loading:false
+}
+
+export function comments(state=initialComments,action){
+	switch(action.type){
+		case 'FUSH_COMMENTS_SUCCESS':
+			return {...state,comment:[action.data,...state.comment]}
+		// case 'FETCH_MORE_COMMENTS':
+		// 	return {comment:[...state.comment,...action.data],page++}
+		default:
+			return state;		
+	}
 }
 
 /**
@@ -143,6 +168,13 @@ export function nav(state=initialNavState,action){
 function authSuccess(data){
 	return {
 		type:AUTH_SUCCESS,
+		data
+	}
+}
+
+function fetchCommentsSuccess(data){
+	return {
+		type:FETCH_MORE_COMMENTS,
 		data
 	}
 }
@@ -165,6 +197,9 @@ export function goToDetail(v){
 
 export function chatTo(id){
 	return {type:CHATTO,data:id}
+}
+export function goToUserMainPage(id){
+	return {type:USERMAINPAGE,data:id}
 }
 
 export function goback(){
@@ -303,3 +338,44 @@ export function saveUserInfo(val,id){
 				})
 	}
 }
+
+export function fetchComments(dataId){
+
+	console.log(dataId);
+
+	return dispatch=>{
+		axios.post(`${port}/user/fetchcomments`,{dataId:dataId})
+				.then(res=>{
+					if(res.status===200&&res.data.code===0){
+						
+						console.log("保存成功的数据",res.data.data);
+
+						dispatch(fetchCommentsSuccess(res.data.data))
+						
+					}else{
+						dispatch(errorMsg(res.data.msg))
+					}
+				})
+	}
+}
+
+export function sendComment({text,dataId,commentId}){
+
+	console.log({text,dataId,commentId});
+
+	return dispatch=>{
+		axios.post(`${port}/user/sendcomment`,{text,dataId,commentId})
+				.then(res=>{
+					if(res.status===200&&res.data.code===0){
+						
+						console.log("保存成功的数据",res.data.data);
+
+						//dispatch(authSuccess(res.data.data))
+						
+					}else{
+						dispatch(errorMsg(res.data.msg))
+					}
+				})
+	}
+}
+

@@ -31,6 +31,7 @@ import MyCamera from "../../component/panel/camera"
 import VideoRoll from "../../component/panel/videoRoll"
 import ProgressBox from "../../component/progressbar/progressbar"
 import { publish,loadData } from '../../redux/data.redux'
+
 import SquareContent from "../../component/squarecontent/squarecontent"
 import EditerVideo from "../../component/panel/camera/editerVideo.js"
 
@@ -274,6 +275,7 @@ renderPanelContainer=()=>{
                 platform={Platform.OS}
                 data={this.props.datalist}
                 numberOfSections={1}
+                _loadData={()=>this.props.loadData()}
               />
       </View>
     );

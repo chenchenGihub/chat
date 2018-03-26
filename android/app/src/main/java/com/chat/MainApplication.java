@@ -3,6 +3,7 @@ package com.chat;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.github.godness84.RNRecyclerViewList.RNRecyclerviewListPackage;
 import com.dylanvann.fastimage.FastImageViewPackage;
 import com.airbnb.android.react.lottie.LottiePackage;
 import com.brentvatne.react.ReactVideoPackage;
@@ -42,6 +43,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNRecyclerviewListPackage(),
             new FastImageViewPackage(),
             new LottiePackage(),
             new ReactVideoPackage(),

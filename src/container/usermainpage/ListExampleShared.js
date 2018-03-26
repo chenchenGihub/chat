@@ -21,23 +21,28 @@ const {
   Text,
   TextInput,
   View,
+  Dimensions
 } = ReactNative;
 
-type Item = {title: string, text: string, key: string, pressed: boolean, noImage?: ?boolean};
+import Video from 'react-native-video'; 
 
-function genItemData(count: number, start: number = 0): Array<Item> {
-  const dataBlob = [];
-  for (let ii = start; ii < count + start; ii++) {
-    const itemHash = Math.abs(hashCode('Item ' + ii));
-    dataBlob.push({
-      title: 'Item ' + ii,
-      text: LOREM_IPSUM.substr(0, itemHash % 301 + 20),
-      key: String(ii),
-      pressed: false,
-    });
-  }
-  return dataBlob;
-}
+const { width, height } = Dimensions.get("window");
+
+type Item = { text: any, key: string, paused: boolean, noImage?: ?boolean};
+
+// function genItemData(count: number, start: number = 0): Array<Item> {
+//   const dataBlob = [];
+//   for (let ii = start; ii < count + start; ii++) {
+//     const itemHash = Math.abs(hashCode('Item ' + ii));
+//     dataBlob.push({
+//       title: 'Item ' + ii,
+//       text: LOREM_IPSUM.substr(0, itemHash % 301 + 20),
+//       key: String(ii),
+//       pressed: false,
+//     });
+//   }
+//   return dataBlob;
+// }
 
 const HORIZ_WIDTH = 200;
 const ITEM_HEIGHT = 72;
@@ -50,13 +55,25 @@ class ItemComponent extends React.PureComponent<{
   onShowUnderlay?: () => void,
   onHideUnderlay?: () => void,
 }> {
+
+
+  constructor(props) {
+    super(props);
+  
+    this.state = {};
+    
+  }
+
   _onPress = () => {
     this.props.onPress(this.props.item.key);
   };
+
+  
+
   render() {
     const {fixedHeight, horizontal, item} = this.props;
-    const itemHash = Math.abs(hashCode(item.title));
-    const imgSource = THUMB_URLS[itemHash % THUMB_URLS.length];
+   // const itemHash = Math.abs(hashCode(item.title));
+    //const imgSource = THUMB_URLS[itemHash % THUMB_URLS.length];
     return (
       <TouchableHighlight
         onPress={this._onPress}
@@ -68,7 +85,7 @@ class ItemComponent extends React.PureComponent<{
         style={horizontal ? styles.horizItem : styles.item}>
         <View style={[
           styles.row, horizontal && {width: HORIZ_WIDTH}, fixedHeight && {height: ITEM_HEIGHT}]}>
-          {!item.noImage && <Image style={styles.thumb} source={imgSource} />}
+          
           <Text
             style={styles.text}
             numberOfLines={(horizontal || fixedHeight) ? 3 : undefined}>
@@ -80,16 +97,91 @@ class ItemComponent extends React.PureComponent<{
   }
 }
 
-const renderStackedItem = ({item}: {item: Item}) => {
-  const itemHash = Math.abs(hashCode(item.title));
-  const imgSource = THUMB_URLS[itemHash % THUMB_URLS.length];
-  return (
-    <View style={styles.stacked}>
-      <Text style={styles.stackedText}>{item.title} - {item.text}</Text>
-      <Image style={styles.thumb} source={imgSource} />
-    </View>
-  );
-};
+class RenderStackedItem extends React.PureComponent{
+  constructor(props) {
+    super(props);
+  
+    this.state = {};
+
+    this.loadStart=this.loadStart.bind(this);
+    this.setDuration=this.setDuration.bind(this);
+    this.setTime=this.setTime.bind(this);
+    this.onEnd=this.onEnd.bind(this);
+    this.videoError=this.videoError.bind(this);
+    this.onBuffer=this.onBuffer.bind(this);
+    this.onTimedMetadata=this.onTimedMetadata.bind(this);
+
+  }
+  
+  loadStart(data){
+    console.log(data)
+  }
+  setDuration(data){
+    console.log(data)
+  }
+  onEnd(data){
+    console.log(data)
+  }
+  videoError(data){
+    console.log(data)
+  }
+  onBuffer(data){
+    console.log(data)
+  }
+  onTimedMetadata(data){
+    console.log(data)
+  }
+  setTime(data){
+    console.log(data)
+  }
+
+
+
+    _playRef = (ref) => { this._VideoRef = ref; };
+    
+    render(){
+      
+        const {
+          item,
+          loadStart,
+          setDuration,
+          setTime,
+          onEnd,
+          videoError,
+          onBuffer,
+          onTimedMetadata,
+        } = this.props;
+
+       
+        return (
+          <View style={styles.stacked}>
+           <Video source={{uri: item.body}}   // Can be a URL or a local file.
+             poster={item.thumbnail}
+             ref={this._playRef}                                      // Store reference
+             rate={1.0}                              // 0 is paused, 1 is normal.
+             volume={1.0}                            // 0 is muted, 1 is normal.
+             muted={false}                           // Mutes the audio entirely.
+             paused={false}                          // Pauses playback entirely.
+             resizeMode="cover"                      // Fill the whole screen at aspect ratio.*
+             repeat={true}                           // Repeat forever.
+             playInBackground={false}                // Audio continues to play when app entering background.
+             playWhenInactive={false}                // [iOS] Video continues to play when control or notification center are shown.
+             ignoreSilentSwitch={"ignore"}           // [iOS] ignore | obey - When 'ignore', audio will still play with the iOS hard silent switch set to silent. When 'obey', audio will toggle with the switch. When not specified, will inherit audio settings as usual.
+             progressUpdateInterval={250.0}          // [iOS] Interval to fire onProgress (default to ~250ms)
+             onLoadStart={this.loadStart}            // Callback when video starts to load
+             onLoad={this.setDuration}               // Callback when video loads
+             onProgress={this.setTime}               // Callback every ~250ms with currentTime
+             onEnd={this.onEnd}                      // Callback when playback finishes
+             onError={this.videoError}               // Callback when video cannot be loaded
+             onBuffer={this.onBuffer}                // Callback when remote video is buffering
+             onTimedMetadata={this.onTimedMetadata}  // Callback when the stream receive some metadata
+             style={styles.Video} />
+          </View>
+        );
+    }
+}
+  
+  
 
 class FooterComponent extends React.PureComponent<{}> {
   render() {
@@ -97,25 +189,21 @@ class FooterComponent extends React.PureComponent<{}> {
       <View style={styles.headerFooterContainer}>
         <SeparatorComponent />
         <View style={styles.headerFooter}>
-          <Text>LIST FOOTER</Text>
+          <Text>没有更多</Text>
         </View>
       </View>
     );
   }
 }
 
-class HeaderComponent extends React.PureComponent<{}> {
-  render() {
-    return (
+const HeaderComponent = ({title}) => (
       <View style={styles.headerFooterContainer}>
-        <View style={styles.headerFooter}>
-          <Text>LIST HEADER</Text>
+        <View style={styles.header}>
+          <Text style={styles.title}>{title}</Text>
         </View>
         <SeparatorComponent />
-      </View>
-    );
-  }
-}
+      </View>);
+  
 
 class SeparatorComponent extends React.PureComponent<{}> {
   render() {
@@ -148,37 +236,12 @@ class Spindicator extends React.PureComponent<$FlowFixMeProps> {
   }
 }
 
-const THUMB_URLS = [
-  require('./Thumbnails/like.png'),
-  require('./Thumbnails/dislike.png'),
-  require('./Thumbnails/call.png'),
-  require('./Thumbnails/fist.png'),
-  require('./Thumbnails/bandaged.png'),
-  require('./Thumbnails/flowers.png'),
-  require('./Thumbnails/heart.png'),
-  require('./Thumbnails/liking.png'),
-  require('./Thumbnails/party.png'),
-  require('./Thumbnails/poke.png'),
-  require('./Thumbnails/superlike.png'),
-  require('./Thumbnails/victory.png'),
-];
 
-const LOREM_IPSUM = 'Lorem ipsum dolor sit amet, ius ad pertinax oportere accommodare, an vix \
-civibus corrumpit referrentur. Te nam case ludus inciderint, te mea facilisi adipiscing. Sea id \
-integre luptatum. In tota sale consequuntur nec. Erat ocurreret mei ei. Eu paulo sapientem \
-vulputate est, vel an accusam intellegam interesset. Nam eu stet pericula reprimique, ea vim illud \
-modus, putant invidunt reprehendunt ne qui.';
 
-/* eslint no-bitwise: 0 */
-function hashCode(str: string): number {
-  let hash = 15;
-  for (let ii = str.length - 1; ii >= 0; ii--) {
-    hash = ((hash << 5) - hash) + str.charCodeAt(ii);
-  }
-  return hash;
-}
 
-const HEADER = {height: 30, width: 100};
+
+
+const HEADER = {height: undefined, width: width};
 const SEPARATOR_HEIGHT = StyleSheet.hairlineWidth;
 
 function getItemLayout(data: any, index: number, horizontal?: boolean) {
@@ -233,9 +296,13 @@ function PlainInput(props: Object) {
 const styles = StyleSheet.create({
   headerFooter: {
     ...HEADER,
-    alignSelf: 'center',
+    padding: width*0.02,
     alignItems: 'center',
-    justifyContent: 'center',
+  },
+  header: {
+    ...HEADER,
+    padding: width*0.02,
+
   },
   headerFooterContainer: {
     backgroundColor: 'rgb(239, 239, 244)',
@@ -289,9 +356,16 @@ const styles = StyleSheet.create({
     },
   }),
   stacked: {
+    flex:1,
     alignItems: 'center',
     backgroundColor: 'white',
-    padding: 10,
+    width:width,
+    height:width*0.5
+  },
+  Video: {
+    flex:1,
+    width:width,
+    height:width*0.5
   },
   thumb: {
     width: 50,
@@ -312,6 +386,12 @@ const styles = StyleSheet.create({
   text: {
     flex: 1,
   },
+  title:{
+    lineHeight:width*0.05,
+    textAlign: 'auto',
+    fontSize: width*0.05,
+    fontWeight: 'bold',
+  }
 });
 
 module.exports = {
@@ -322,9 +402,9 @@ module.exports = {
   PlainInput,
   SeparatorComponent,
   Spindicator,
-  genItemData,
+  //genItemData,
   getItemLayout,
   pressItem,
   renderSmallSwitchOption,
-  renderStackedItem,
+  RenderStackedItem,
 };

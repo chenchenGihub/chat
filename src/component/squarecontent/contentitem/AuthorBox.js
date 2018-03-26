@@ -4,6 +4,7 @@ import {
   Text ,
   TouchableOpacity,
   TouchableNativeFeedback,
+  TouchableWithoutFeedback,
   Platform,
   StyleSheet,
   Dimensions
@@ -20,24 +21,40 @@ const { width,height } = Dimensions.get('window');
 export const AuthorBox =({
 	author,
 	subscribe,
+	goToUserDetail,
 	title,
 	publishtime,
 	hideOperate,
 	AuthorBoxStyle,
-}) => (<View style={AuthorBoxStyle}>
-		<Thumbnail small source={{uri: author.avatarurl}} />
-		<View style={styles.nameandtime}>
+	onPress
+}) => (
+	
+	<TouchableWithoutFeedback onPress={onPress}>
+		<View style={AuthorBoxStyle}
+				pointerEvents={"box-none"}
+		   >
+		   <TouchableWithoutFeedback onPress={goToUserDetail}>
+		   
+		   	<Thumbnail small source={{uri: author.avatarurl}} />
+		   </TouchableWithoutFeedback>
+
+			<View style={styles.nameandtime}>
+				<Text style={styles.name}>{author.userName}</Text>
+				<View style={styles.dateandmobile}>
+					<Text style={styles.publishtime}>{moment(publishtime).calendar()}</Text>
+					<FontAwesome name="mobile" size={16} style={styles.mobileIcon}/>
+					<Text style={styles.publishtime}>{author.deviceModel}</Text>
+				</View>		
 			
-			<Text style={styles.name}>{author.userName}</Text>
-			<View style={styles.dateandmobile}>
-				<Text style={styles.publishtime}>{moment(publishtime).calendar()}</Text>
-				<FontAwesome name="mobile" size={16} style={styles.mobileIcon}/>
-				<Text style={styles.publishtime}>{author.deviceModel}</Text>
-			</View>
+		   </View>
 			
-		</View>
-		<Subscribe subscribe={subscribe} SubscribeStyle={styles.SubscribeStyle} color={"#db595d"}/>
-	  </View>)
+		  
+			<TouchableOpacity onPress={subscribe}>
+				<Subscribe SubscribeStyle={styles.SubscribeStyle} color={"#db595d"}/>
+			</TouchableOpacity>
+		  </View>
+		</TouchableWithoutFeedback>)
+	
 
 
 const styles=StyleSheet.create({
